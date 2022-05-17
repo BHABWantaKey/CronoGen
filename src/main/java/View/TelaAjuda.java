@@ -11,4 +11,21 @@ import java.awt.*;
  */
 public class TelaAjuda extends JFrame{
     
+    
+    public TelaAjuda (){
+        
+         setTitle("Tela de Entrada");
+        setSize(400,400);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+        
+        
+        
+    }
+    
+    public static void main(String[] args) {
+        
+        TelaAjuda tela=new TelaAjuda();
+        
+    }
 }

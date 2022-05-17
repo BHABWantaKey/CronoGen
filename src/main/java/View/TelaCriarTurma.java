@@ -11,4 +11,26 @@ import java.awt.*;
  */
 public class TelaCriarTurma extends JFrame {
     
+
+    public TelaCriarTurma(){
+
+        setTitle("Criar Turma");
+        setSize(400, 400);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+        
+        
+        
+        
+        }
+        
+        public static void main(String[] args) {
+            
+        
+            TelaCriarTurma tela=new TelaCriarTurma();
+        }
+        
+
+
+
 }

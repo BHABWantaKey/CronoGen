@@ -11,4 +11,23 @@ import java.awt.*;
  */
 public class TelaGerirCronograma extends JFrame {
     
+
+    public TelaGerirCronograma(){
+
+        setTitle("Gerir Cronogramas");
+        setSize(400, 400);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+        
+        
+        
+        
+        }
+        
+        public static void main(String[] args) {
+            
+        
+            TelaGerirCronograma tela=new TelaGerirCronograma();
+        }
+        
 }

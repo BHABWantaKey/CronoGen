@@ -13,7 +13,24 @@ import java.awt.*;
  */
 public class TelaAdicionarDisponibilidade extends JFrame {
     
+    public TelaAdicionarDisponibilidade(){
 
+        setTitle("Adicionar Disponibilidade");
+        setSize(400, 400);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+        
+        
+        
+        
+        }
+        
+        public static void main(String[] args) {
+            
+        
+            TelaAdicionarDisponibilidade tela=new TelaAdicionarDisponibilidade();
+        }
+        
    
 
 
