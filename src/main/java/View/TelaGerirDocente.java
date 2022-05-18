@@ -14,11 +14,15 @@ public class TelaGerirDocente extends JFrame {
     public TelaGerirDocente(){
 
         setTitle("Gerir Docente");
-        setSize(400, 400);
+        setSize(800, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
+        setLocationRelativeTo(null);
         
+        //Criação de componentes e do Painel
+
         
+       
         
         
         }
