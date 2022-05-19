@@ -14,17 +14,88 @@ public class TelaGerirDocente extends JFrame {
     public TelaGerirDocente(){
 
         setTitle("Gerir Docente");
-        setSize(800, 600);
+        setSize(800, 380);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
         setLocationRelativeTo(null);
         
         //Criação de componentes e do Painel
+        Container container = this.getContentPane();
 
+        JLabel lblNome = new JLabel("Nome");
+        JTextField tfNome= new JTextField(30);
+
+        JLabel lblApelido = new JLabel("Apelido");
+        JTextField tfApelido= new JTextField(30);
+
+        JLabel lblMorada = new JLabel("Morada");
+        JTextField tfMorada= new JTextField(30);
+
+        JLabel lblNuit = new JLabel("Nuit");
+        JTextField tfNuit= new JTextField(30);
+
+        JLabel lblDisciplina = new JLabel("Disciplinas");
+        JComboBox cbDisciplina= new JComboBox<>();
         
-       
-        
-        
+        JLabel lbBI = new JLabel("Número de BI");
+        JTextField tfBi= new JTextField(30);
+
+        JLabel lbDocentes = new JLabel("Lista de Docentes");
+
+        JButton btnAdicionarDocente = new JButton("Adicionar");
+        JButton btnActualizar = new JButton("Actualizar");
+        JButton btnApagar = new JButton("Apagar");
+        JList listaDocentes=new JList<>();
+        JLabel lbArea = new JLabel("Areas");
+        JComboBox cbArea=new JComboBox<>();
+
+        container.setLayout(null);
+
+        lblNome.setBounds(30,100,150,20);
+        tfNome.setBounds(30,120,250,20);
+       lblApelido.setBounds(30,140,150,20);
+       tfApelido.setBounds(30,160,250,20);
+        lbBI.setBounds(30,180,150,20);
+        tfBi.setBounds(30,200,250,20);
+        lblNuit.setBounds(30,220,150,20);
+        tfNuit.setBounds(30,240,250,20);
+        lblMorada.setBounds(30,260,150,20);
+        tfMorada.setBounds(30,280,250,20);
+        btnAdicionarDocente.setBounds(30,305,100,20);
+        btnActualizar.setBounds(140,305,100,20);
+        lbDocentes.setBounds(600,100,120,20);
+        listaDocentes.setBounds(600,120,160,180);
+        btnApagar.setBounds(600,305,75,20);
+        lblDisciplina.setBounds(350,100,150,20);
+        cbDisciplina.setBounds(350,120,150,20);
+        lbArea.setBounds(350,140,150,20);
+        cbArea.setBounds(350,160,150,20);
+
+        //Coluna Oeste
+        container.add(lblNome);
+        container.add(tfNome);
+        container.add(lblApelido);
+        container.add(tfApelido);
+        container.add(lblMorada);
+        container.add(tfMorada);
+        container.add(lblNuit);
+        container.add(tfNuit);
+        container.add(lbBI);
+        container.add(tfBi);
+        container.add(btnAdicionarDocente);
+        container.add(btnApagar);
+        container.add(btnActualizar);
+        //Coluna central
+        container.add(lblDisciplina);
+        container.add(cbDisciplina);
+        container.add(lbArea);
+        container.add(cbArea);
+        //Coluna Este
+        container.add(lbDocentes);
+        container.add(listaDocentes);
+
+
+             
         }
         
         public static void main(String[] args) {

@@ -29,7 +29,6 @@ public class TelaMenuSecretario extends JFrame {
          JButton btnTurmas = new JButton("Turmas");
          JButton btnRelatorios = new JButton("Relatórios");
          JButton btnSair = new JButton("Sair");
-         
          Container container = this.getContentPane();
          container.setLayout(null);
 
@@ -50,6 +49,14 @@ public class TelaMenuSecretario extends JFrame {
         container.add(btnTurmas);
         container.add(btnRelatorios);
         container.add(btnSair);
+
+
+        
+
+
+
+
+
 
 }
 
