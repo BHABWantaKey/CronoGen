@@ -9,13 +9,13 @@ package Model;
  * @author Espaco de Inovacao
  */
 public abstract class Area {
-    String area;
+    String[] area;
 
-    public String getArea() {
+    public String[] getArea() {
         return area;
     }
 
-    public void setArea(String area) {
+    public void setArea(String[] area) {
         this.area = area;
     }
     

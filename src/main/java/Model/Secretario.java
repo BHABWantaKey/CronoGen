@@ -10,8 +10,15 @@ package Model;
  */
 public class Secretario extends Pessoa {
     
-    
+    int codigo;
     public String usuario;
     public String senha;
-    
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
 }

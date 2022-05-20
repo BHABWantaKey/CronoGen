@@ -4,6 +4,7 @@
  */
 package Model;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -14,4 +15,12 @@ public class Actividades extends Area {
     String nome;
     Date duracao;
     String periodo;
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 }

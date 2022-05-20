@@ -31,11 +31,11 @@ public class TelaGerirDocente extends JFrame {
         JLabel lblMorada = new JLabel("Morada");
         JTextField tfMorada= new JTextField(30);
 
-        JLabel lblNuit = new JLabel("Nuit");
-        JTextField tfNuit= new JTextField(30);
+        JLabel lbEmail = new JLabel("Email");
+        JTextField tfEmail= new JTextField(30);
 
-        JLabel lblDisciplina = new JLabel("Disciplinas");
-        JComboBox cbDisciplina= new JComboBox<>();
+        JLabel lblArea = new JLabel("Areas");
+        JComboBox cbArea= new JComboBox<>();
         
         JLabel lbBI = new JLabel("Número de BI");
         JTextField tfBi= new JTextField(30);
@@ -46,8 +46,7 @@ public class TelaGerirDocente extends JFrame {
         JButton btnActualizar = new JButton("Actualizar");
         JButton btnApagar = new JButton("Apagar");
         JList listaDocentes=new JList<>();
-        JLabel lbArea = new JLabel("Areas");
-        JComboBox cbArea=new JComboBox<>();
+
 
         container.setLayout(null);
 
@@ -57,8 +56,8 @@ public class TelaGerirDocente extends JFrame {
        tfApelido.setBounds(30,160,250,20);
         lbBI.setBounds(30,180,150,20);
         tfBi.setBounds(30,200,250,20);
-        lblNuit.setBounds(30,220,150,20);
-        tfNuit.setBounds(30,240,250,20);
+        lbEmail.setBounds(30,220,150,20);
+        tfEmail.setBounds(30,240,250,20);
         lblMorada.setBounds(30,260,150,20);
         tfMorada.setBounds(30,280,250,20);
         btnAdicionarDocente.setBounds(30,305,100,20);
@@ -66,10 +65,9 @@ public class TelaGerirDocente extends JFrame {
         lbDocentes.setBounds(600,100,120,20);
         listaDocentes.setBounds(600,120,160,180);
         btnApagar.setBounds(600,305,75,20);
-        lblDisciplina.setBounds(350,100,150,20);
-        cbDisciplina.setBounds(350,120,150,20);
-        lbArea.setBounds(350,140,150,20);
-        cbArea.setBounds(350,160,150,20);
+        lblArea.setBounds(350,100,150,20);
+        cbArea.setBounds(350,120,150,20);
+
 
         //Coluna Oeste
         container.add(lblNome);
@@ -78,18 +76,17 @@ public class TelaGerirDocente extends JFrame {
         container.add(tfApelido);
         container.add(lblMorada);
         container.add(tfMorada);
-        container.add(lblNuit);
-        container.add(tfNuit);
+        container.add(lbEmail);
+        container.add(tfEmail);
         container.add(lbBI);
         container.add(tfBi);
         container.add(btnAdicionarDocente);
         container.add(btnApagar);
         container.add(btnActualizar);
         //Coluna central
-        container.add(lblDisciplina);
-        container.add(cbDisciplina);
-        container.add(lbArea);
+        container.add(lblArea);
         container.add(cbArea);
+
         //Coluna Este
         container.add(lbDocentes);
         container.add(listaDocentes);

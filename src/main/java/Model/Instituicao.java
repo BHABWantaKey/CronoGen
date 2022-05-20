@@ -4,11 +4,16 @@
  */
 package Model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Espaco de Inovacao
  */
 public class Instituicao {
+
+    String nome;
+    ArrayList<Secretario> secretarios;
     Turma turmas[];
     Docente docentes[];
 

@@ -9,11 +9,13 @@ package Model;
  * @author Espaco de Inovacao
  */
 public abstract class Pessoa {
+
+
     public String nome;
+    public String apelido;
     public String morada;
-    public String celular;
     public String email;
-    public int idade;
+
     
 
     public String getNome() {
@@ -32,13 +34,6 @@ public abstract class Pessoa {
         this.morada = morada;
     }
 
-    public String getCelular() {
-        return celular;
-    }
-
-    public void setCelular(String celular) {
-        this.celular = celular;
-    }
 
     public String getEmail() {
         return email;
@@ -48,14 +43,7 @@ public abstract class Pessoa {
         this.email = email;
     }
 
-    public int getIdade() {
-        return idade;
-    }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
-    
     
     
 }

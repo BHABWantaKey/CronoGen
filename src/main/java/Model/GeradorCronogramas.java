@@ -12,9 +12,9 @@ import java.util.*;
  */
 public class GeradorCronogramas {
     
-    ArrayList actividades;
-    ArrayList turmas;
-    ArrayList docentes;
+    ArrayList<Actividades> actividades;
+    Turma turma;
+    ArrayList<Turma> docentes;
     Instituicao instituicao;
     
     

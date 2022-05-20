@@ -9,5 +9,19 @@ package Model;
  * @author Espaco de Inovacao
  */
 public class Cronograma {
-    
+    int codigo;
+    Actividades actividades;
+    Area[] area;
+    Docente[] docente;
+    Turma turma;
+    Instituicao instituicao;
+
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
 }
