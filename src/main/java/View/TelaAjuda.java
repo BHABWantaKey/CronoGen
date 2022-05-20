@@ -4,7 +4,7 @@
  */
 package View;
 import javax.swing.*;
-import java.awt.*;
+
 /**
  *
  * @author Espaco de Inovacao

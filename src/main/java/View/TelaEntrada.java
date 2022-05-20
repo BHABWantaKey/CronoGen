@@ -2,10 +2,6 @@ package View;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.border.Border;
-
-import Model.Turma;
 
 public class TelaEntrada extends JFrame{
 

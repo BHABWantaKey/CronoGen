@@ -5,6 +5,10 @@
 package View;
 import javax.swing.*;
 import java.awt.*;
+
+import com.toedter.calendar.JCalendar;
+import com.toedter.components.UTF8ResourceBundle;
+
 /**
  *
  * @author Espaco de Inovacao
@@ -26,7 +30,7 @@ public class TelaGerirActividades extends JFrame {
         JLabel lbNome =new JLabel("Nome");
         JTextField tfNome = new JTextField();
         JLabel lbPeriodo = new JLabel("Período");
-        JTextField tfPeriodo=new JTextField();
+        JCalendar jcPeriodo=new JCalendar();
         JLabel Area = new JLabel("Areas");
         JComboBox cbAreas = new JComboBox<>();
         JButton btnActualizar = new JButton("Actualizar");
@@ -40,7 +44,7 @@ public class TelaGerirActividades extends JFrame {
         lbNome.setBounds(50,100,250,20);
         tfNome.setBounds(50,120,250,20);
         lbPeriodo.setBounds(50,140,120,20);
-        tfPeriodo.setBounds(50,160,250,20);
+        jcPeriodo.setBounds(50,160,250,20);
         Area.setBounds(50,180,120,20);
         cbAreas.setBounds(50,200,150,20);
         btnCriarActividades.setBounds(50,240,80,20);
@@ -52,7 +56,7 @@ public class TelaGerirActividades extends JFrame {
         container.add(lbNome);
         container.add(tfNome);
         container.add(lbPeriodo);
-        container.add(tfPeriodo);
+        container.add(jcPeriodo);
         container.add(Area);
         container.add(cbAreas);
         container.add(btnActualizar);
