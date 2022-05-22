@@ -68,7 +68,7 @@ if(accao.getSource()==btnEntrar){
     Secretario secretario = new Secretario();
     secretario.email=tfEmail.getText();
     secretario.senha= String.valueOf(tfSenha.getPassword());
-
+btnEntrar.setText("Clicado");
 
 }
 
