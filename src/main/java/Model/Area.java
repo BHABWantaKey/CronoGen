@@ -4,11 +4,16 @@
  */
 package Model;
 
+import javax.swing.*;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
 /**
  *
  * @author Espaco de Inovacao
  */
-public abstract class Area {
+public abstract class Area implements Serializable {
     String[] area;
 
     public String[] getArea() {
@@ -18,6 +23,12 @@ public abstract class Area {
     public void setArea(String[] area) {
         this.area = area;
     }
-    
-    
+
+
+
+
+    public Area() {
+
+
+    }
 }

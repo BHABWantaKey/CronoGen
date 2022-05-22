@@ -38,7 +38,14 @@ public class TelaGerirActividades extends JFrame {
         JList listaDeActividades = new JList<>();
         JButton btnApagar = new JButton("Apagar");
         JButton btnCriarActividades = new JButton("Criar");
-        
+        JCheckBox chSegundaFeira =new JCheckBox();
+        JCheckBox chTercaFeira =new JCheckBox();
+        JCheckBox chQuartaFeira =new JCheckBox();
+        JCheckBox chQuintaFeira =new JCheckBox();
+        JCheckBox chSextaFeira =new JCheckBox();
+        JCheckBox chSabado =new JCheckBox();
+        JCheckBox chDomingo =new JCheckBox();
+        JLabel lbDiasDeSemana= new JLabel("Dias de semana");
       
         //Alocação de coordenadas no painel.
         lbNome.setBounds(50,100,250,20);
@@ -52,6 +59,11 @@ public class TelaGerirActividades extends JFrame {
         lbACtividades.setBounds(320,100,200,20);
         listaDeActividades.setBounds(320,120,200,120);
         btnApagar.setBounds(320,240,80,20);
+        lbDiasDeSemana.setBounds(50,240,120,20);
+        chDomingo.setBounds(50,220,120,20);
+
+
+
         //Adicionando compenentes ao painel.
         container.add(lbNome);
         container.add(tfNome);
@@ -64,7 +76,8 @@ public class TelaGerirActividades extends JFrame {
         container.add(btnCriarActividades);
         container.add(listaDeActividades);
         container.add(lbACtividades);
-        
+        container.add(lbDiasDeSemana);
+        container.add(chDomingo);
         
         
         
@@ -72,7 +85,7 @@ public class TelaGerirActividades extends JFrame {
         
         public static void main(String[] args) {
             
-        
+
             TelaGerirActividades tela=new TelaGerirActividades();
         }
         

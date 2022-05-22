@@ -4,11 +4,15 @@
  */
 package Model;
 
+import com.toedter.calendar.JCalendar;
+
+import java.io.Serializable;
+
 /**
  *
  * @author Espaco de Inovacao
  */
-public class Secretario extends Pessoa {
+public class Secretario extends Pessoa implements Serializable {
     
     int codigo;
     public String usuario;

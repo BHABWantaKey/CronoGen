@@ -17,5 +17,12 @@ public class GeradorCronogramas {
     ArrayList<Turma> docentes;
     Instituicao instituicao;
     
-    
+
+
+    public void gerarCronograma(){
+
+
+
+
+    }
 }
