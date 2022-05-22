@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 
 public class TelaRegistarSecretario extends JFrame implements ActionListener {
 
@@ -65,10 +66,19 @@ public TelaRegistarSecretario() {
     @Override
     public void actionPerformed(ActionEvent accao) {
 if(accao.getSource()==btnEntrar){
-    Secretario secretario = new Secretario();
-    secretario.email=tfEmail.getText();
-    secretario.senha= String.valueOf(tfSenha.getPassword());
-btnEntrar.setText("Clicado");
+
+    File ficheiro =new File("Secretarios.crono");
+    Secretario secretario1 = new Secretario();
+    secretario1.email=tfEmail.getText();
+    secretario1.senha= String.valueOf(tfSenha.getPassword());
+    try {
+        ObjectOutputStream objecto= new ObjectOutputStream(new FileOutputStream(ficheiro));
+        objecto.writeObject(secretario1);
+        objecto.close();
+    } catch (IOException e) {
+        throw new RuntimeException(e);
+    }
+
 
 }
 
