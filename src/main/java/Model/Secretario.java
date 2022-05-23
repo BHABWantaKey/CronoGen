@@ -9,23 +9,20 @@ import com.toedter.calendar.JCalendar;
 import java.io.Serializable;
 
 /**
- *
  * @author Espaco de Inovacao
  */
 public class Secretario extends Pessoa implements Serializable {
-    
-    int codigo;
-    public String usuario;
 
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
 
     public String senha;
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 
     public int getCodigo() {
         return codigo;

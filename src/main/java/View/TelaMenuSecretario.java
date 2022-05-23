@@ -11,6 +11,15 @@ import java.awt.*;
  */
 public class TelaMenuSecretario extends JFrame {
 
+
+
+    JButton btnDocentes = new JButton("Docentes");
+    JButton btnActividades = new JButton("Actividades");
+    JButton btnCronogramas = new JButton("Cronogramas");
+    JButton btnCriarCronogramas = new JButton("Criar Cronogramas");
+    JButton btnTurmas = new JButton("Turmas");
+    JButton btnRelatorios = new JButton("Relatórios");
+    JButton btnSair = new JButton("Sair");
     public TelaMenuSecretario(){
 
         setTitle("Menu Principal");
@@ -22,13 +31,7 @@ public class TelaMenuSecretario extends JFrame {
 
 
 
-        JButton btnDocentes = new JButton("Docentes");
-         JButton btnActividades = new JButton("Actividades");
-         JButton btnCronogramas = new JButton("Cronogramas");
-         JButton btnCriarCronogramas = new JButton("Criar Cronogramas");
-         JButton btnTurmas = new JButton("Turmas");
-         JButton btnRelatorios = new JButton("Relatórios");
-         JButton btnSair = new JButton("Sair");
+
          Container container = this.getContentPane();
          container.setLayout(null);
 
