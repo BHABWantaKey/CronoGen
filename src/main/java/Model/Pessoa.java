@@ -4,11 +4,13 @@
  */
 package Model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Espaco de Inovacao
  */
-public abstract class Pessoa {
+public abstract class Pessoa implements Serializable {
 
 
     public String nome;

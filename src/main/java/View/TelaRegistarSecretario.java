@@ -67,16 +67,18 @@ public TelaRegistarSecretario() {
     public void actionPerformed(ActionEvent accao) {
 if(accao.getSource()==btnEntrar){
 
-    File ficheiro =new File("Secretarios.crono");
+    File ficheiro =new File("src\\main\\java\\Ficheiros\\Secretario.crono");
     Secretario secretario1 = new Secretario();
-    secretario1.email=tfEmail.getText();
-    secretario1.senha= String.valueOf(tfSenha.getPassword());
+    secretario1.setEmail(tfEmail.getText());
+    secretario1.setNome(String.valueOf(tfSenha.getPassword()));
     try {
         ObjectOutputStream objecto= new ObjectOutputStream(new FileOutputStream(ficheiro));
         objecto.writeObject(secretario1);
         objecto.close();
+        JOptionPane.showMessageDialog(null,"Email"+secretario1.getEmail());
+
     } catch (IOException e) {
-        throw new RuntimeException(e);
+        JOptionPane.showMessageDialog(null, "Occorreu um erro ao Registar o secretário.");
     }
 
 

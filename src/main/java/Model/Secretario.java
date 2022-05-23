@@ -16,6 +16,15 @@ public class Secretario extends Pessoa implements Serializable {
     
     int codigo;
     public String usuario;
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
     public String senha;
 
     public int getCodigo() {
