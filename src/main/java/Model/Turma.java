@@ -4,14 +4,15 @@
  */
 package Model;
 
+import java.io.Serializable;
+
 /**
- *
  * @author Espaco de Inovacao
  */
-public class Turma {
+public class Turma implements Serializable {
     public int codigo;
     public String nome;
-    public Docente [] docentes;
+    public Docente[] docentes;
     public Cronograma cronograma;
 
 

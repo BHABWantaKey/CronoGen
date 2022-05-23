@@ -7,21 +7,17 @@ package Model;
 import java.util.*;
 
 /**
- *
  * @author Espaco de Inovacao
  */
 public class GeradorCronogramas {
-    
-    ArrayList<Actividades> actividades;
+
+    ArrayList<Actividade> actividades;
     Turma turma;
     ArrayList<Turma> docentes;
     Instituicao instituicao;
-    
 
 
-    public void gerarCronograma(){
-
-
+    public void gerarCronograma() {
 
 
     }

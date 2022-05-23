@@ -4,13 +4,13 @@
  */
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- *
  * @author Espaco de Inovacao
  */
-public class Instituicao {
+public class Instituicao implements Serializable {
 
     String nome;
     ArrayList<Secretario> secretarios;
@@ -32,8 +32,6 @@ public class Instituicao {
     public void setDocentes(Docente[] docentes) {
         this.docentes = docentes;
     }
-    
-    
-    
-    
+
+
 }

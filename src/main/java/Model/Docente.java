@@ -4,16 +4,16 @@
  */
 package Model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
- *
  * @author Espaco de Inovacao
  */
-public class Docente extends Pessoa {
+public class Docente extends Pessoa implements Serializable {
 
 
-    Area areas[];
+    AreaActividade areas[];
     Date tempo_livre_inicial[];
     Date tempo_livre_final[];
 
@@ -25,11 +25,11 @@ public class Docente extends Pessoa {
         this.tempo_livre_inicial = tempo_livre_inicial;
     }
 
-    public Area[] getAreas() {
+    public AreaActividade[] getAreas() {
         return areas;
     }
 
-    public void setAreas(Area[] areas) {
+    public void setAreas(AreaActividade[] areas) {
         this.areas = areas;
     }
 

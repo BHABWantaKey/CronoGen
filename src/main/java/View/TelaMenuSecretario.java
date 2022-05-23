@@ -3,14 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package View;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
- *
  * @author Espaco de Inovacao
  */
-public class TelaMenuSecretario extends JFrame {
-
+public class TelaMenuSecretario extends JFrame implements ActionListener {
 
 
     JButton btnDocentes = new JButton("Docentes");
@@ -20,7 +22,8 @@ public class TelaMenuSecretario extends JFrame {
     JButton btnTurmas = new JButton("Turmas");
     JButton btnRelatorios = new JButton("Relatórios");
     JButton btnSair = new JButton("Sair");
-    public TelaMenuSecretario(){
+
+    public TelaMenuSecretario() {
 
         setTitle("Menu Principal");
         setSize(590, 400);
@@ -29,21 +32,25 @@ public class TelaMenuSecretario extends JFrame {
         setLocationRelativeTo(null);
 
 
+        Container container = this.getContentPane();
+        container.setLayout(null);
 
+        btnDocentes.setBounds(50, 50, 120, 50);
+        btnActividades.setBounds(200, 50, 120, 50);
+        btnCronogramas.setBounds(350, 50, 120, 50);
+        btnCriarCronogramas.setBounds(50, 200, 120, 50);
+        btnTurmas.setBounds(200, 200, 120, 50);
+        btnRelatorios.setBounds(350, 200, 120, 50);
+        btnSair.setBounds(470, 330, 103, 30);
 
-
-         Container container = this.getContentPane();
-         container.setLayout(null);
-
-        btnDocentes.setBounds(50,50,120,50);
-        btnActividades.setBounds(200,50,120,50);
-        btnCronogramas.setBounds(350,50,120,50);
-        btnCriarCronogramas.setBounds(50,200,120,50);
-        btnTurmas.setBounds(200,200,120,50);
-        btnRelatorios.setBounds(350,200,120,50);
-        btnSair.setBounds(470,330,103,30);
-
-        
+        //Adicionando ActionListenners aos botões
+        btnDocentes.addActionListener(this);
+        btnActividades.addActionListener(this);
+        btnCronogramas.addActionListener(this);
+        btnCriarCronogramas.addActionListener(this);
+        btnTurmas.addActionListener(this);
+        btnRelatorios.addActionListener(this);
+        btnSair.addActionListener(this);
 
         container.add(btnDocentes);
         container.add(btnActividades);
@@ -54,24 +61,39 @@ public class TelaMenuSecretario extends JFrame {
         container.add(btnSair);
 
 
-        
+    }
 
 
+    public static void main(String[] args) {
 
 
+        TelaMenuSecretario tela = new TelaMenuSecretario();
+    }
 
 
-}
+    @Override
+    public void actionPerformed(ActionEvent accao) {
 
+        if (accao.getSource() == btnDocentes) {
 
+            TelaGerirDocente telaGerirDocente = new TelaGerirDocente();
 
-         
-        
-        public static void main(String[] args) {
-            
-        
-            TelaMenuSecretario tela=new TelaMenuSecretario();
+        } else if (accao.getSource() == btnActividades) {
+            TelaGerirActividades telaGerirActividades = new TelaGerirActividades();
+        } else if (accao.getSource() == btnRelatorios) {
+            TelaRelatorios telaRelatorios = new TelaRelatorios();
+
+        } else if (accao.getSource() == btnSair) {
+            this.dispose();
+            TelaEntrada telaEntrada = new TelaEntrada();
+        } else if (accao.getSource() == btnCriarCronogramas) {
+            TelaHorario telaHorario = new TelaHorario();
+        } else if (accao.getSource() == btnCronogramas) {
+            TelaGerirCronograma telaGerirCronograma = new TelaGerirCronograma();
+        } else if (accao.getSource() == btnTurmas) {
+            TelaGerirTurma telaGerirTurma = new TelaGerirTurma();
+
         }
-        
-    
+
+    }
 }

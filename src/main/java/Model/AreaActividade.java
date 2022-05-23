@@ -4,23 +4,25 @@
  */
 package Model;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.io.Serializable;
 
 /**
- *
  * @author Espaco de Inovacao
  */
-public class Actividades extends Area {
-    String nome;
-    Date duracao;
-    String periodo;
+public abstract class AreaActividade implements Serializable {
+    String area;
 
-    public String getNome() {
-        return nome;
+    public String getArea() {
+        return area;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+
+    public AreaActividade() {
+
+
     }
 }

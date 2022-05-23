@@ -4,14 +4,15 @@
  */
 package Model;
 
+import java.io.Serializable;
+
 /**
- *
  * @author Espaco de Inovacao
  */
-public class Cronograma {
+public class Cronograma implements Serializable {
     int codigo;
-    Actividades actividades;
-    Area[] area;
+    Actividade actividades;
+    AreaActividade[] area;
     Docente[] docente;
     Turma turma;
     Instituicao instituicao;
