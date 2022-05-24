@@ -12,8 +12,12 @@ import java.util.Date;
  */
 public class Docente extends Pessoa implements Serializable {
 
+    @Override
+    public String toString() {
+        return nome;
+    }
 
-    AreaActividade areas[];
+    AreaActividade area;
     Date tempo_livre_inicial[];
     Date tempo_livre_final[];
 
@@ -25,12 +29,12 @@ public class Docente extends Pessoa implements Serializable {
         this.tempo_livre_inicial = tempo_livre_inicial;
     }
 
-    public AreaActividade[] getAreas() {
-        return areas;
+    public AreaActividade getArea() {
+        return area;
     }
 
-    public void setAreas(AreaActividade[] areas) {
-        this.areas = areas;
+    public void setArea(AreaActividade areas) {
+        this.area = areas;
     }
 
 

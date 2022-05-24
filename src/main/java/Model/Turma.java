@@ -15,6 +15,29 @@ public class Turma implements Serializable {
     public Docente[] docentes;
     public Cronograma cronograma;
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Docente[] getDocentes() {
+        return docentes;
+    }
+
+    public void setDocentes(Docente[] docentes) {
+        this.docentes = docentes;
+    }
+
+    public Cronograma getCronograma() {
+        return cronograma;
+    }
+
+    public void setCronograma(Cronograma cronograma) {
+        this.cronograma = cronograma;
+    }
 
     public int getCodigo() {
         return codigo;

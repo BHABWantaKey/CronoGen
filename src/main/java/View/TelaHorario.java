@@ -40,8 +40,8 @@ public class TelaHorario {
         frame.getContentPane().setBackground(Color.WHITE);
         frame.setBounds(100, 100, 753, 601);
         frame.setDefaultCloseOperation(3);
-        frame.getContentPane().setLayout((LayoutManager)null);
-        frame.setLocationRelativeTo((Component)null);
+        frame.getContentPane().setLayout((LayoutManager) null);
+        frame.setLocationRelativeTo((Component) null);
         model.setColumnIdentifiers(columns);
         table.setModel(model);
         table.setBackground(Color.WHITE);
@@ -66,6 +66,7 @@ public class TelaHorario {
         lblAula.setBounds(20, 388, 88, 42);
         frame.getContentPane().add(lblAula);
         JButton btnADD = new JButton("ADD");
+
         btnADD.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
@@ -73,12 +74,12 @@ public class TelaHorario {
 
                 try {
                     ObjectInputStream objecto = new ObjectInputStream(new FileInputStream(ficheiro));
-                    Secretario secretario=(Secretario)objecto.readObject();
+                    Secretario secretario = (Secretario) objecto.readObject();
                     objecto.close();
 
                     row[0] = secretario.getEmail();
                     model.addRow(row);
-                        JOptionPane.showMessageDialog(null,"Actividade carregada com sucesso!"+secretario.getNome());
+                    JOptionPane.showMessageDialog(null, "Actividade carregada com sucesso!" + secretario.getNome());
 
                 } catch (IOException clique) {
                     throw new RuntimeException(clique);

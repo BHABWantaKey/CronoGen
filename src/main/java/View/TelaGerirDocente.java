@@ -3,83 +3,77 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package View;
+
+import Model.Actividade;
+import Model.AreaActividade;
+import Model.Docente;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.*;
+import java.util.ArrayList;
+
 /**
- *
  * @author Espaco de Inovacao
  */
-public class TelaGerirDocente extends JFrame {
+public class TelaGerirDocente extends JFrame implements ActionListener {
 
-    public TelaGerirDocente(){
+
+    //Criação de componentes e do Painel
+    Container container = this.getContentPane();
+
+    JLabel lblNome = new JLabel("Nome");
+    JTextField tfNome = new JTextField(30);
+
+    JLabel lbEmail = new JLabel("Email");
+    JTextField tfEmail = new JTextField(30);
+
+
+    JLabel lblArea = new JLabel("Areas");
+    JComboBox<AreaActividade> cbArea = new JComboBox<AreaActividade>();
+
+    JLabel lbDocentes = new JLabel("Lista de Docentes");
+
+    JButton btnAdicionarDocente = new JButton("Adicionar");
+    JButton btnActualizar = new JButton("Actualizar");
+    JButton btnApagar = new JButton("Apagar");
+    JList<Docente> listaDocentes = new JList<Docente>();
+
+
+    DefaultListModel<Docente> listModel = new DefaultListModel<>();
+
+    public TelaGerirDocente() {
 
         setTitle("Gerir Docente");
-        setSize(800, 380);
+        setSize(550, 380);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
         setLocationRelativeTo(null);
-        
-        //Criação de componentes e do Painel
-        Container container = this.getContentPane();
-
-        JLabel lblNome = new JLabel("Nome");
-        JTextField tfNome= new JTextField(30);
-
-        JLabel lblApelido = new JLabel("Apelido");
-        JTextField tfApelido= new JTextField(30);
-
-        JLabel lblMorada = new JLabel("Morada");
-        JTextField tfMorada= new JTextField(30);
-
-        JLabel lbEmail = new JLabel("Email");
-        JTextField tfEmail= new JTextField(30);
-
-        JLabel lblArea = new JLabel("Areas");
-        JComboBox cbArea= new JComboBox<>();
-        
-        JLabel lbBI = new JLabel("Número de BI");
-        JTextField tfBi= new JTextField(30);
-
-        JLabel lbDocentes = new JLabel("Lista de Docentes");
-
-        JButton btnAdicionarDocente = new JButton("Adicionar");
-        JButton btnActualizar = new JButton("Actualizar");
-        JButton btnApagar = new JButton("Apagar");
-        JList listaDocentes=new JList<>();
 
 
         container.setLayout(null);
-
-        lblNome.setBounds(30,100,150,20);
-        tfNome.setBounds(30,120,250,20);
-       lblApelido.setBounds(30,140,150,20);
-       tfApelido.setBounds(30,160,250,20);
-        lbBI.setBounds(30,180,150,20);
-        tfBi.setBounds(30,200,250,20);
-        lbEmail.setBounds(30,220,150,20);
-        tfEmail.setBounds(30,240,250,20);
-        lblMorada.setBounds(30,260,150,20);
-        tfMorada.setBounds(30,280,250,20);
-        btnAdicionarDocente.setBounds(30,305,100,20);
-        btnActualizar.setBounds(140,305,100,20);
-        lbDocentes.setBounds(600,100,120,20);
-        listaDocentes.setBounds(600,120,160,180);
-        btnApagar.setBounds(600,305,75,20);
-        lblArea.setBounds(350,100,150,20);
-        cbArea.setBounds(350,120,150,20);
+        btnAdicionarDocente.addActionListener(this);
+        lblNome.setBounds(30, 100, 150, 20);
+        tfNome.setBounds(30, 120, 250, 20);
+        lbEmail.setBounds(30, 140, 150, 20);
+        tfEmail.setBounds(30, 160, 250, 20);
+        btnAdicionarDocente.setBounds(30, 260, 100, 20);
+        btnActualizar.setBounds(140, 260, 100, 20);
+        lbDocentes.setBounds(350, 100, 120, 20);
+        listaDocentes.setBounds(350, 120, 160, 180);
+        btnApagar.setBounds(350, 305, 75, 20);
+        lblArea.setBounds(30, 200, 150, 20);
+        cbArea.setBounds(30, 220, 150, 20);
 
 
         //Coluna Oeste
         container.add(lblNome);
         container.add(tfNome);
-        container.add(lblApelido);
-        container.add(tfApelido);
-        container.add(lblMorada);
-        container.add(tfMorada);
         container.add(lbEmail);
         container.add(tfEmail);
-        container.add(lbBI);
-        container.add(tfBi);
+        container.add(tfEmail);
         container.add(btnAdicionarDocente);
         container.add(btnApagar);
         container.add(btnActualizar);
@@ -91,15 +85,64 @@ public class TelaGerirDocente extends JFrame {
         container.add(lbDocentes);
         container.add(listaDocentes);
 
+        listaDocentes.setModel(listModel);
 
-             
-        }
-        
-        public static void main(String[] args) {
+
+    }
+
+    public static void main(String[] args) {
+
+
+        TelaGerirDocente tela = new TelaGerirDocente();
+    }
+
+
+    @Override
+    public void actionPerformed(ActionEvent accao) {
+
+
+        listaDocentes.getSelectionModel().addListSelectionListener(e -> {
+            Docente docente = new Docente();
+            docente = listaDocentes.getSelectedValue();
+            tfNome.setText(docente.getNome());
+            tfEmail.setText(docente.getEmail());
+
+            //Pôr a ler do ficheiro!!!!!!!!!!!!!!!!!!
+
             
-        
-            TelaGerirDocente tela=new TelaGerirDocente();
+        });
+
+        if (accao.getSource() == btnAdicionarDocente) {
+            ArrayList<Docente> docentes = new ArrayList<Docente>();
+            Docente docente = new Docente();
+            docente.setEmail(tfEmail.getText());
+            docente.setNome(tfNome.getText());
+            //  docente.setArea((AreaActividade) cbArea.getSelectedItem());
+
+
+            docentes.add(docente);
+            File ficheiro = new File("Actividades.crono");
+
+            try {
+                ObjectOutputStream objecto = new ObjectOutputStream(new FileOutputStream(ficheiro));
+                objecto.writeObject(docentes);
+                objecto.close();
+
+                ObjectInputStream objectoLer = new ObjectInputStream(new FileInputStream(ficheiro));
+                docentes = (ArrayList<Docente>) objectoLer.readObject();
+                objectoLer.close();
+
+                listModel.addElement(docente);
+
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Ocorreu uma falha ao registar Actividade");
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                JOptionPane.showMessageDialog(null, "Ocorreu uma falha ao Actualizar a lista de Actividades!");
+                throw new RuntimeException(e);
+            }
+
+
         }
-        
-    
+    }
 }

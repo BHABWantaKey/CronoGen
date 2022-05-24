@@ -8,6 +8,7 @@ import Model.Actividade;
 import Model.AreaActividade;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,7 +31,7 @@ public class TelaGerirActividades extends JFrame implements ActionListener {
     JComboBox cbAreas = new JComboBox<AreaActividade>();
     JButton btnActualizar = new JButton("Actualizar");
     JLabel lbACtividades = new JLabel("Lista de Actividades");
-    JList listaDeActividades = new JList<Actividade>();
+    JList<Actividade> listaDeActividades = new JList<Actividade>();
     JButton btnApagar = new JButton("Apagar");
     JButton btnCriarActividades = new JButton("Criar");
     JCheckBox chTarde = new JCheckBox("Periodo da Tarde");
@@ -38,6 +39,7 @@ public class TelaGerirActividades extends JFrame implements ActionListener {
     JCheckBox chNoite = new JCheckBox("Período da Noite");
     JCheckBox chIncluirFinalDeSemana = new JCheckBox("Incluir Finais de semana");
     JLabel lbFiltros = new JLabel("Filtros");
+    DefaultListModel<Actividade> listModel = new DefaultListModel<>();
 
     public TelaGerirActividades() {
 
@@ -50,7 +52,9 @@ public class TelaGerirActividades extends JFrame implements ActionListener {
         Container container = this.getContentPane();
         container.setLayout(null);
 
+        listaDeActividades.setModel(listModel);
         btnCriarActividades.addActionListener(this);
+
         //Alocação de coordenadas no painel.
         lbNome.setBounds(50, 100, 250, 20);
         tfNome.setBounds(50, 120, 250, 20);
@@ -58,7 +62,6 @@ public class TelaGerirActividades extends JFrame implements ActionListener {
         jspNumeroDeVezes.setBounds(50, 160, 60, 20);
         lbArea.setBounds(50, 180, 120, 20);
         cbAreas.setBounds(50, 200, 150, 20);
-
         lbFiltros.setBounds(50, 240, 80, 20);
         chManha.setBounds(50, 260, 160, 20);
         chTarde.setBounds(50, 280, 160, 20);
@@ -100,6 +103,19 @@ public class TelaGerirActividades extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent accao) {
+        listaDeActividades.getSelectionModel().addListSelectionListener(e -> {
+            Actividade actividade = new Actividade();
+            actividade = listaDeActividades.getSelectedValue();
+            tfNome.setText(actividade.getNome());
+            jspNumeroDeVezes.setValue(actividade.getNumeroDeOcorrencias());
+            if (actividade.getManha() == true) chManha.setSelected(true);
+            if (actividade.getTarde() == true) chTarde.setSelected(true);
+            if (actividade.getNoite() == true) chNoite.setSelected(true);
+            if (actividade.getIncluirFinalDeSemana() == true) chIncluirFinalDeSemana.setSelected(true);
+            //Pôr a ler do ficheiro!!!!!!!!!!!!!!!!!!
+
+
+        });
         if (accao.getSource() == btnCriarActividades) {
             ArrayList<Actividade> actividades = new ArrayList<>();
             Actividade actividade = new Actividade();
@@ -122,8 +138,7 @@ public class TelaGerirActividades extends JFrame implements ActionListener {
                 ObjectInputStream objectoLer = new ObjectInputStream(new FileInputStream(ficheiro));
                 actividades = (ArrayList<Actividade>) objectoLer.readObject();
                 objectoLer.close();
-                DefaultListModel<Actividade> listModel = new DefaultListModel<>();
-                listaDeActividades.setModel(listModel);
+
                 listModel.addElement(actividade);
 
             } catch (IOException e) {
@@ -133,6 +148,10 @@ public class TelaGerirActividades extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Ocorreu uma falha ao Actualizar a lista de Actividades!");
                 throw new RuntimeException(e);
             }
+
+
+        }
+        if (accao.getSource() == listaDeActividades) {
 
 
         }
