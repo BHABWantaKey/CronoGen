@@ -4,7 +4,6 @@
  */
 package View;
 
-import Model.Docente;
 import Model.Turma;
 
 import javax.swing.*;
@@ -19,7 +18,7 @@ import java.util.ArrayList;
  */
 public class TelaGerirTurma extends JFrame implements ActionListener {
 
-
+    ArrayList<Turma> turmas = new ArrayList<Turma>();
     //Criação de componentes
     JLabel lbNome = new JLabel("Nome");
     JTextField tfNome = new JTextField(30);
@@ -55,6 +54,7 @@ public class TelaGerirTurma extends JFrame implements ActionListener {
         tfNome.setBounds(50, 120, 250, 20);
 
         btnCriarTurma.setBounds(50, 240, 80, 20);
+        btnCriarTurma.addActionListener(this);
         btnActualizar.setBounds(150, 240, 100, 20);
         lbListaDeTurmas.setBounds(320, 100, 200, 20);
         listaDeTurmas.setBounds(320, 120, 200, 120);
@@ -68,13 +68,41 @@ public class TelaGerirTurma extends JFrame implements ActionListener {
         container.add(btnCriarTurma);
         container.add(listaDeTurmas);
         container.add(lbListaDeTurmas);
+        listaDeTurmas.setModel(listModel);
 
     }
 
-    public static void main(String[] args) {
+    public void carregarTurmas() throws IOException, ClassNotFoundException {
+
+
+        Turma turma = new Turma();
+        turmas.add(turma);
+        File ficheiro = new File("turmas.crono");
+        ObjectInputStream objectoLer = null;
+        try {
+            objectoLer = new ObjectInputStream(new FileInputStream(ficheiro));
+            turmas = (ArrayList<Turma>) objectoLer.readObject();
+            objectoLer.close();
+            for (int i = 0; i < turmas.size(); i++) {
+
+                turma = turmas.get(i);
+                listModel.addElement(turma);
+            }
+            JOptionPane.showMessageDialog(null, "Turmas carregadas com sucesso.");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao carregar a Lista de turmas.");
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
 
         TelaGerirTurma tela = new TelaGerirTurma();
+        tela.carregarTurmas();
     }
 
 
@@ -88,7 +116,7 @@ public class TelaGerirTurma extends JFrame implements ActionListener {
         });
 
         if (accao.getSource() == btnCriarTurma) {
-            ArrayList<Turma> turmas = new ArrayList<Turma>();
+
             Turma turma = new Turma();
 
             turma.setNome(tfNome.getText());
@@ -96,7 +124,7 @@ public class TelaGerirTurma extends JFrame implements ActionListener {
 
 
             turmas.add(turma);
-            File ficheiro = new File("Actividades.crono");
+            File ficheiro = new File("turmas.crono");
 
             try {
                 ObjectOutputStream objecto = new ObjectOutputStream(new FileOutputStream(ficheiro));
@@ -106,14 +134,11 @@ public class TelaGerirTurma extends JFrame implements ActionListener {
                 ObjectInputStream objectoLer = new ObjectInputStream(new FileInputStream(ficheiro));
                 turmas = (ArrayList<Turma>) objectoLer.readObject();
                 objectoLer.close();
-
                 listModel.addElement(turma);
+                JOptionPane.showMessageDialog(null, "Turma " + turma.getNome() + " registada com sucesso.");
 
-            } catch (IOException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 JOptionPane.showMessageDialog(null, "Ocorreu uma falha ao registar Actividade");
-                throw new RuntimeException(e);
-            } catch (ClassNotFoundException e) {
-                JOptionPane.showMessageDialog(null, "Ocorreu uma falha ao Actualizar a lista de Actividades!");
                 throw new RuntimeException(e);
             }
 

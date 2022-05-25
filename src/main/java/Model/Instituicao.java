@@ -17,6 +17,22 @@ public class Instituicao implements Serializable {
     Turma turmas[];
     Docente docentes[];
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public ArrayList<Secretario> getSecretarios() {
+        return secretarios;
+    }
+
+    public void setSecretarios(ArrayList<Secretario> secretarios) {
+        this.secretarios = secretarios;
+    }
+
     public Turma[] getTurmas() {
         return turmas;
     }

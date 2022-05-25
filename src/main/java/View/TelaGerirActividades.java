@@ -6,6 +6,7 @@ package View;
 
 import Model.Actividade;
 import Model.AreaActividade;
+import Model.Docente;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
@@ -20,8 +21,7 @@ import java.util.ArrayList;
  * @author Espaco de Inovacao
  */
 public class TelaGerirActividades extends JFrame implements ActionListener {
-
-
+    ArrayList<Actividade> actividades = new ArrayList<>();
     //Criação de componentes
     JLabel lbNome = new JLabel("Nome");
     JTextField tfNome = new JTextField();
@@ -94,30 +94,63 @@ public class TelaGerirActividades extends JFrame implements ActionListener {
 
     }
 
-    public static void main(String[] args) {
+    public void carregarActividades() throws IOException, ClassNotFoundException {
+
+
+        Actividade actividade = new Actividade();
+        actividades.add(actividade);
+        File ficheiro = new File("actividades.crono");
+        ObjectInputStream objectoLer = null;
+        try {
+            objectoLer = new ObjectInputStream(new FileInputStream(ficheiro));
+            actividades = (ArrayList<Actividade>) objectoLer.readObject();
+            objectoLer.close();
+            for (int i = 0; i < actividades.size(); i++) {
+
+                actividade = actividades.get(i);
+                listModel.addElement(actividade);
+            }
+            JOptionPane.showMessageDialog(null, "Docentes carregados com sucesso");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao carregar a Lista de docentes.");
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
 
         TelaGerirActividades tela = new TelaGerirActividades();
+        tela.carregarActividades();
     }
 
 
     @Override
     public void actionPerformed(ActionEvent accao) {
+
         listaDeActividades.getSelectionModel().addListSelectionListener(e -> {
             Actividade actividade = new Actividade();
+
             actividade = listaDeActividades.getSelectedValue();
             tfNome.setText(actividade.getNome());
             jspNumeroDeVezes.setValue(actividade.getNumeroDeOcorrencias());
             if (actividade.getManha() == true) chManha.setSelected(true);
+            else chManha.setSelected(false);
             if (actividade.getTarde() == true) chTarde.setSelected(true);
+            else chTarde.setSelected(false);
             if (actividade.getNoite() == true) chNoite.setSelected(true);
+            else chNoite.setSelected(false);
             if (actividade.getIncluirFinalDeSemana() == true) chIncluirFinalDeSemana.setSelected(true);
+            else chIncluirFinalDeSemana.setSelected(false);
             //Pôr a ler do ficheiro!!!!!!!!!!!!!!!!!!
 
 
         });
         if (accao.getSource() == btnCriarActividades) {
-            ArrayList<Actividade> actividades = new ArrayList<>();
+
             Actividade actividade = new Actividade();
             actividade.setNome(tfNome.getText());
             //  actividade.setArea(cbAreas.getSelectedItem().toString());
@@ -128,7 +161,7 @@ public class TelaGerirActividades extends JFrame implements ActionListener {
             if (chNoite.isSelected()) actividade.setNoite(true);
             if (chIncluirFinalDeSemana.isSelected()) actividade.setIncluirFinalDeSemana(true);
             actividades.add(actividade);
-            File ficheiro = new File("Actividades.crono");
+            File ficheiro = new File("actividades.crono");
 
             try {
                 ObjectOutputStream objecto = new ObjectOutputStream(new FileOutputStream(ficheiro));

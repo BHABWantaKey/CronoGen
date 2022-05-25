@@ -23,6 +23,13 @@ public class Actividade extends AreaActividade implements Serializable {
 
     Boolean incluirFinalDeSemana, manha, tarde, noite;
 
+    public Actividade() {
+        this.incluirFinalDeSemana = incluirFinalDeSemana;
+        this.manha = false;
+        this.tarde = false;
+        this.noite = false;
+    }
+
     public Boolean getIncluirFinalDeSemana() {
         return incluirFinalDeSemana;
     }

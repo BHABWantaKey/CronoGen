@@ -15,6 +15,11 @@ public class Turma implements Serializable {
     public Docente[] docentes;
     public Cronograma cronograma;
 
+    @Override
+    public String toString() {
+        return nome;
+    }
+
     public String getNome() {
         return nome;
     }

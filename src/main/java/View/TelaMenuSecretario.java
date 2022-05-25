@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 /**
  * @author Espaco de Inovacao
@@ -77,6 +78,13 @@ public class TelaMenuSecretario extends JFrame implements ActionListener {
         if (accao.getSource() == btnDocentes) {
 
             TelaGerirDocente telaGerirDocente = new TelaGerirDocente();
+            try {
+                telaGerirDocente.carregarDocentes();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
 
         } else if (accao.getSource() == btnActividades) {
             TelaGerirActividades telaGerirActividades = new TelaGerirActividades();

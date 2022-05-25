@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class TelaGerirDocente extends JFrame implements ActionListener {
 
-
+    ArrayList<Docente> docentes = new ArrayList<Docente>();
     //Criação de componentes e do Painel
     Container container = this.getContentPane();
 
@@ -90,10 +90,39 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
 
     }
 
-    public static void main(String[] args) {
+    public void carregarDocentes() throws IOException, ClassNotFoundException {
+
+        //ArrayList<Docente> docentes = new ArrayList<Docente>();
+        Docente docente = new Docente();
+        docentes.add(docente);
+        File ficheiro = new File("docentes.crono");
+        ObjectInputStream objectoLer = null;
+        try {
+            objectoLer = new ObjectInputStream(new FileInputStream(ficheiro));
+            docentes = (ArrayList<Docente>) objectoLer.readObject();
+            objectoLer.close();
+            for (int i = 0; i < docentes.size(); i++) {
+
+                docente = docentes.get(i);
+                listModel.addElement(docente);
+            }
+            JOptionPane.showMessageDialog(null, "Docentes carregados com sucesso");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao carregar a Lista de docentes.");
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
 
         TelaGerirDocente tela = new TelaGerirDocente();
+        tela.carregarDocentes();
+
+
     }
 
 
@@ -107,13 +136,11 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
             tfNome.setText(docente.getNome());
             tfEmail.setText(docente.getEmail());
 
-            //Pôr a ler do ficheiro!!!!!!!!!!!!!!!!!!
 
-            
         });
 
         if (accao.getSource() == btnAdicionarDocente) {
-            ArrayList<Docente> docentes = new ArrayList<Docente>();
+
             Docente docente = new Docente();
             docente.setEmail(tfEmail.getText());
             docente.setNome(tfNome.getText());
@@ -121,11 +148,12 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
 
 
             docentes.add(docente);
-            File ficheiro = new File("Actividades.crono");
+            File ficheiro = new File("docentes.crono");
 
             try {
                 ObjectOutputStream objecto = new ObjectOutputStream(new FileOutputStream(ficheiro));
                 objecto.writeObject(docentes);
+                objecto.flush();
                 objecto.close();
 
                 ObjectInputStream objectoLer = new ObjectInputStream(new FileInputStream(ficheiro));
