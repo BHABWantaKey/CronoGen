@@ -18,16 +18,9 @@ public class Docente extends Pessoa implements Serializable {
     }
 
     AreaActividade area;
-    Date tempo_livre_inicial[];
-    Date tempo_livre_final[];
+    boolean[] dias = new boolean[6];
+    boolean horas[] = new boolean[23];
 
-    public Date[] getTempo_livre_inicial() {
-        return tempo_livre_inicial;
-    }
-
-    public void setTempo_livre_inicial(Date[] tempo_livre_inicial) {
-        this.tempo_livre_inicial = tempo_livre_inicial;
-    }
 
     public AreaActividade getArea() {
         return area;

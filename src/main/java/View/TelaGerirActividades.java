@@ -110,9 +110,9 @@ public class TelaGerirActividades extends JFrame implements ActionListener {
                 actividade = actividades.get(i);
                 listModel.addElement(actividade);
             }
-            JOptionPane.showMessageDialog(null, "Docentes carregados com sucesso");
+            JOptionPane.showMessageDialog(null, "Actividades carregados com sucesso");
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao carregar a Lista de docentes.");
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao carregar a Lista de actividades.");
             throw new RuntimeException(e);
         }
 
