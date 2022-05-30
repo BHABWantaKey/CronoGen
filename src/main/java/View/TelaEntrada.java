@@ -6,10 +6,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.util.ArrayList;
 import javax.swing.*;
 
 public class TelaEntrada extends JFrame implements ActionListener {
 
+    ArrayList<Secretario> secretarios=new ArrayList<>();
 
     JLabel lblEmail = new JLabel("E-mail");
     JTextField tfEmail = new JTextField(50);
@@ -70,19 +72,23 @@ public class TelaEntrada extends JFrame implements ActionListener {
 
             try {
                 ObjectInputStream objecto = new ObjectInputStream(new FileInputStream(ficheiro));
-                Secretario secretario = (Secretario) objecto.readObject();
+                secretarios = (ArrayList<Secretario>) objecto.readObject();
                 objecto.close();
+                Secretario secretario = new Secretario();
+                int i=0;
+                TelaMenuSecretario telaMenuSecretario;
+                boolean status=false;
+                for (i=0;i<secretarios.size();i++){
+                    secretario=secretarios.get(i);
+                    if (secretario.getEmail().equalsIgnoreCase(tfEmail.getText()) && secretario.getSenha().equalsIgnoreCase(tfSenha.getText())){
+                        JOptionPane.showMessageDialog(null,"Sessão iniciada como "+ secretario.getNome());
+                        this.dispose();   new TelaMenuSecretario(); status=true;
+
+                    }
+
+                }if (tfEmail.getText()!=secretario.getEmail() && tfSenha.getText()!=secretario.getSenha()); JOptionPane.showMessageDialog(null,"Credênciais incorrectas, tente novamente!"); ;
 
 
-                if (tfEmail.getText().equalsIgnoreCase(secretario.getEmail()) && tfSenha.getText().equalsIgnoreCase(secretario.getSenha())) {
-
-                    JOptionPane.showMessageDialog(null, "Sessão iniciada como: " + secretario.getNome());
-                    this.dispose();
-                    TelaMenuSecretario menuSecretario = new TelaMenuSecretario();
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "Credênciais incorrectas, tente novamente!");
-                }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } catch (ClassNotFoundException e) {

@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Area;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -32,7 +33,7 @@ public class TelaRegistarInstituicao extends JFrame implements ActionListener {
     JButton btnAddArea= new JButton("Adicionar");
     JButton btnApagarArea = new JButton("Apagar");
     JTextField tfAreas = new JTextField();
-    DefaultListModel<AreaActividade> listModel=new DefaultListModel<AreaActividade>();
+    DefaultListModel<AreaActividade> listModel= new DefaultListModel<>();
 
     public TelaRegistarInstituicao() {
 
@@ -73,10 +74,9 @@ public class TelaRegistarInstituicao extends JFrame implements ActionListener {
     public void carregarAreas() throws IOException, ClassNotFoundException {
 
 
-        AreaActividade areaActividade = new AreaActividade() {
-        };
+        AreaActividade areaActividade = new AreaActividade();
         areasActividade.add(areaActividade);
-        File ficheiro = new File("areas.crono");
+        File ficheiro = new File("areasDeActividade.crono");
         ObjectInputStream objectoLer = null;
         try {
             objectoLer = new ObjectInputStream(new FileInputStream(ficheiro));
@@ -89,7 +89,7 @@ public class TelaRegistarInstituicao extends JFrame implements ActionListener {
             }
             JOptionPane.showMessageDialog(null, "Áreas de actividade carregadas com sucesso");
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao carregar a Lista de Áreas de Actividade.");
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao carregar as áreas de actividade.");
             throw new RuntimeException(e);
         }
 
@@ -138,37 +138,39 @@ public class TelaRegistarInstituicao extends JFrame implements ActionListener {
 
         if (accao.getSource() == btnAddArea) {
 
-            AreaActividade areaActividade = new AreaActividade() {
-            };
+            AreaActividade areaActividade = new AreaActividade();
 
             areaActividade.setArea(tfAreas.getText());
 
 
-            File ficheiroArea = new File("areas.crono");
+
+            areasActividade.add(areaActividade);
+            File ficheiro = new File("areasDeActividade.crono");
 
             try {
-                ObjectOutputStream objecto = new ObjectOutputStream(new FileOutputStream(ficheiroArea));
-                objecto.writeObject(areaActividade);
+                ObjectOutputStream objecto = new ObjectOutputStream(new FileOutputStream(ficheiro));
+                objecto.writeObject(areasActividade);
+                objecto.flush();
                 objecto.close();
-                listModel.addElement(areaActividade);
 
-                ObjectInputStream objectoLer = new ObjectInputStream(new FileInputStream(ficheiroArea));
+                ObjectInputStream objectoLer = new ObjectInputStream(new FileInputStream(ficheiro));
                 areasActividade = (ArrayList<AreaActividade>) objectoLer.readObject();
                 objectoLer.close();
 
                 listModel.addElement(areaActividade);
 
-                JOptionPane.showMessageDialog(null, "Área de actividade " + areaActividade.getArea() + " registada com sucesso.");
-
             } catch (IOException e) {
-                JOptionPane.showMessageDialog(null, "Ocorreu uma falha ao registar Área de actividade");
+                JOptionPane.showMessageDialog(null, "Ocorreu uma falha ao registar Actividade");
                 throw new RuntimeException(e);
             } catch (ClassNotFoundException e) {
+                JOptionPane.showMessageDialog(null, "Ocorreu uma falha ao Actualizar a lista de Actividades!");
                 throw new RuntimeException(e);
             }
+
 
         }
 
 
 
-}}
+
+    }}

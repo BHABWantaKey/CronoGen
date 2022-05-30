@@ -22,11 +22,11 @@ import java.util.ArrayList;
  */
 public class TelaGerirActividades extends JFrame implements ActionListener {
     ArrayList<Actividade> actividades = new ArrayList<>();
+    ArrayList<AreaActividade> areasActividade = new ArrayList<>();
     //Criação de componentes
     JLabel lbNome = new JLabel("Nome");
     JTextField tfNome = new JTextField();
     JLabel lbNumeroDeOcorrencias = new JLabel("Ocorrências por Ciclo");
-    JSpinner jspNumeroDeVezes = new JSpinner();
     JLabel lbArea = new JLabel("Areas");
     JComboBox cbAreas = new JComboBox<AreaActividade>();
     JButton btnActualizar = new JButton("Actualizar");
@@ -59,7 +59,7 @@ public class TelaGerirActividades extends JFrame implements ActionListener {
         lbNome.setBounds(50, 100, 250, 20);
         tfNome.setBounds(50, 120, 250, 20);
         lbNumeroDeOcorrencias.setBounds(50, 140, 200, 20);
-        jspNumeroDeVezes.setBounds(50, 160, 60, 20);
+
         lbArea.setBounds(50, 180, 120, 20);
         cbAreas.setBounds(50, 200, 150, 20);
         lbFiltros.setBounds(50, 240, 80, 20);
@@ -78,7 +78,6 @@ public class TelaGerirActividades extends JFrame implements ActionListener {
         container.add(lbNome);
         container.add(tfNome);
         container.add(lbNumeroDeOcorrencias);
-        container.add(jspNumeroDeVezes);
         container.add(lbArea);
         container.add(cbAreas);
         container.add(btnActualizar);
@@ -120,11 +119,40 @@ public class TelaGerirActividades extends JFrame implements ActionListener {
     }
 
 
+    public void carregarAreas() throws IOException, ClassNotFoundException {
+
+
+        AreaActividade areaActividade = new AreaActividade();
+
+
+        areasActividade.add(areaActividade);
+        File ficheiro = new File("areasDeActividade.crono");
+        ObjectInputStream objectoLer = null;
+        try {
+            objectoLer = new ObjectInputStream(new FileInputStream(ficheiro));
+            areasActividade = (ArrayList<AreaActividade>) objectoLer.readObject();
+            objectoLer.close();
+            for (int i = 0; i < areasActividade.size(); i++) {
+
+                areaActividade = areasActividade.get(i);
+               cbAreas.addItem(areaActividade);
+            }
+            JOptionPane.showMessageDialog(null, "Áreas de actividade carregadas com sucesso");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao carregar as áreas de actividade.");
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
 
         TelaGerirActividades tela = new TelaGerirActividades();
         tela.carregarActividades();
+        tela.carregarAreas();
     }
 
 
@@ -136,7 +164,6 @@ public class TelaGerirActividades extends JFrame implements ActionListener {
 
             actividade = listaDeActividades.getSelectedValue();
             tfNome.setText(actividade.getNome());
-            jspNumeroDeVezes.setValue(actividade.getNumeroDeOcorrencias());
             if (actividade.getManha() == true) chManha.setSelected(true);
             else chManha.setSelected(false);
             if (actividade.getTarde() == true) chTarde.setSelected(true);
@@ -153,8 +180,8 @@ public class TelaGerirActividades extends JFrame implements ActionListener {
 
             Actividade actividade = new Actividade();
             actividade.setNome(tfNome.getText());
-            //  actividade.setArea(cbAreas.getSelectedItem().toString());
-            actividade.setNumeroDeOcorrencias((int) jspNumeroDeVezes.getValue());
+            actividade.setAreaActividade((AreaActividade) cbAreas.getSelectedItem());
+
 
             if (chManha.isSelected()) actividade.setManha(true);
             if (chTarde.isSelected()) actividade.setTarde(true);

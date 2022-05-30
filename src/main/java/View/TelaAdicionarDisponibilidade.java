@@ -35,7 +35,7 @@ public class TelaAdicionarDisponibilidade extends JFrame implements ActionListen
     JList<Docente> listaDocentes = new JList<Docente>();
     JButton btnApagar = new JButton("Apagar");
     JButton btnAdicionarDisponibilidade = new JButton("Adicionar");
-    JList  listaDisponibilidade = new JList();
+    JList <Docente> listaDisponibilidade = new JList();
     JLabel lbDisponibilidade = new JLabel("Disponibilidade");
 
     DefaultListModel<Docente> listModelDocentes = new DefaultListModel<>();
@@ -112,11 +112,9 @@ public class TelaAdicionarDisponibilidade extends JFrame implements ActionListen
         }
 
     }
-    public  void preencherCbs(){
 
 
 
-    }
 
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
@@ -124,6 +122,7 @@ public class TelaAdicionarDisponibilidade extends JFrame implements ActionListen
 
         TelaAdicionarDisponibilidade tela = new TelaAdicionarDisponibilidade();
         tela.carregarDocentes();
+
     }
 
     @Override
@@ -143,7 +142,12 @@ public class TelaAdicionarDisponibilidade extends JFrame implements ActionListen
 
             Docente docente = new Docente();
             docente.setNome(tfNome.getText());
-            //  docente.setArea(cbDocentes.getSelectedItem().toString());
+            int tempDias=0;
+            int tempHoras=0;
+
+            tempDias=cbDias.getSelectedIndex();
+            tempHoras=cbHoras.getSelectedIndex();
+
 
 
             File ficheiro = new File("docentes.crono");

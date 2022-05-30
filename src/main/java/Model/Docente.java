@@ -5,7 +5,6 @@
 package Model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @author Espaco de Inovacao
@@ -18,11 +17,7 @@ public class Docente extends Pessoa implements Serializable {
     }
 
     AreaActividade area;
-  public   boolean [] dias = new boolean[6];
 
-
-
-   public boolean horas[] = new boolean[23];
 
 
     public AreaActividade getArea() {

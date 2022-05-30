@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 public class TelaRegistarSecretario extends JFrame implements ActionListener {
 
+    ArrayList <Secretario> secretarios =new ArrayList<>();
+
 
     //Criação de componentes para adicionar ao painel.
     JLabel lbNome = new JLabel("Nome");
@@ -75,8 +77,8 @@ public class TelaRegistarSecretario extends JFrame implements ActionListener {
         if (accao.getSource() == btnEntrar) {
 
 
-            //Cria ArrayList que vai armazenar todos os secretários do sistema e posteriormente armazena-los no ficheiro
-            ArrayList<Secretario> secretarios;
+
+
 
             //Cria Ficheiro
             File ficheiro = new File("Secretarios.crono");
@@ -91,17 +93,19 @@ public class TelaRegistarSecretario extends JFrame implements ActionListener {
             //Por implementar envio de dados por E-mail antes de encerrar a tela.
             if (tfEmail.getText() != "" && tfNome.getText() != "" && tfSenha.getText() != "") {
                 try {
+                    secretarios.add(secretario);
                     //bloco para detecção de erros/excepções.
                     ObjectOutputStream objecto = new ObjectOutputStream(new FileOutputStream(ficheiro));
-                    objecto.writeObject(secretario);
+                    objecto.writeObject(secretarios);
                     objecto.close();
                     this.dispose();
                     JOptionPane.showMessageDialog(null, "Secretário: " + secretario.getNome() + " registado com sucesso");
+                    TelaEntrada telaEntrada = new TelaEntrada();
 
                 } catch (IOException e) {
                     JOptionPane.showMessageDialog(null, "Occorreu um erro ao Registar o secretário.");
                 }
-            } else {
+            } else if  (tfEmail.getText().isEmpty()  && tfNome.getText().isEmpty() && tfSenha.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos");
             }
 

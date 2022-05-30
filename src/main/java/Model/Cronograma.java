@@ -11,14 +11,23 @@ import java.io.Serializable;
  */
 public class Cronograma implements Serializable {
     int codigo;
-    Actividade actividades;
+
     AreaActividade[] area;
     Docente[] docente;
     Turma turma;
-    Instituicao instituicao;
-    String[] [] tabela= new String[6][23]; // Aqui serão armazenadas as combinações entre docente, área e disponiblidade, onde as posições nos arrays representam o dia e hora pra esssa acividades.
 
 
+
+
+    public void gerarCronograma(boolean dia, boolean tempo, Actividade actividade [][]){
+
+
+
+
+
+
+
+    }
     public int getCodigo() {
         return codigo;
     }
@@ -26,4 +35,12 @@ public class Cronograma implements Serializable {
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
+
+
+
+
+
+
+
+
 }

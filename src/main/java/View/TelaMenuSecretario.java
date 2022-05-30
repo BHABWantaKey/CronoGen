@@ -4,17 +4,19 @@
  */
 package View;
 
+import Model.Secretario;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * @author Espaco de Inovacao
  */
 public class TelaMenuSecretario extends JFrame implements ActionListener {
-
 
     JButton btnDocentes = new JButton("Docentes");
     JButton btnActividades = new JButton("Actividades");

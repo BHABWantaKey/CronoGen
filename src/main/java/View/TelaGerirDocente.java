@@ -21,6 +21,7 @@ import java.util.ArrayList;
 public class TelaGerirDocente extends JFrame implements ActionListener {
 
     ArrayList<Docente> docentes = new ArrayList<Docente>();
+    ArrayList<AreaActividade> areasActividade=new ArrayList<>();
     //Criação de componentes e do Painel
     Container container = this.getContentPane();
 
@@ -115,13 +116,41 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
 
     }
 
+    public void carregarAreas() throws IOException, ClassNotFoundException {
+
+
+        AreaActividade areaActividade = new AreaActividade();
+
+
+
+        areasActividade.add(areaActividade);
+        File ficheiro = new File("areasDeActividade.crono");
+        ObjectInputStream objectoLer = null;
+        try {
+            objectoLer = new ObjectInputStream(new FileInputStream(ficheiro));
+            areasActividade = (ArrayList<AreaActividade>) objectoLer.readObject();
+            objectoLer.close();
+            for (int i = 0; i < areasActividade.size(); i++) {
+
+                areaActividade = areasActividade.get(i);
+                cbArea.addItem(areaActividade);
+            }
+            JOptionPane.showMessageDialog(null, "Áreas de actividade carregadas com sucesso");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao carregar as áreas de actividade.");
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
 
         TelaGerirDocente tela = new TelaGerirDocente();
         tela.carregarDocentes();
-
+        tela.carregarAreas();
 
     }
 
@@ -135,7 +164,7 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
             docente = listaDocentes.getSelectedValue();
             tfNome.setText(docente.getNome());
             tfEmail.setText(docente.getEmail());
-
+            cbArea.setSelectedItem(docente.getArea());
 
         });
 
@@ -144,7 +173,7 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
             Docente docente = new Docente();
             docente.setEmail(tfEmail.getText());
             docente.setNome(tfNome.getText());
-            //  docente.setArea((AreaActividade) cbArea.getSelectedItem());
+            docente.setArea((AreaActividade) cbArea.getSelectedItem());
 
 
             docentes.add(docente);

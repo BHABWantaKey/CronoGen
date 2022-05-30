@@ -5,8 +5,6 @@
 package Model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * @author Espaco de Inovacao
@@ -66,19 +64,19 @@ public class Actividade  implements Serializable {
         this.noite = noite;
     }
 
-    public AreaActividade getAreaActividadel() {
-        return areaActividadel;
+    public AreaActividade getAreaActividade() {
+        return areaActividade;
     }
 
-    public void setAreaActividadel(AreaActividade areaActividadel) {
-        this.areaActividadel = areaActividadel;
+    public void setAreaActividade(AreaActividade areaActividade) {
+        this.areaActividade = areaActividade;
     }
 
     public void setNumeroDeOcorrencias(int numeroDeOcorrencias) {
         this.numeroDeOcorrencias = numeroDeOcorrencias;
     }
 
-    AreaActividade areaActividadel;
+    AreaActividade areaActividade;
 
     public String getNome() {
         return nome;
