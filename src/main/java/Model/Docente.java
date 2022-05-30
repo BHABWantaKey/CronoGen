@@ -18,8 +18,11 @@ public class Docente extends Pessoa implements Serializable {
     }
 
     AreaActividade area;
-    boolean[] dias = new boolean[6];
-    boolean horas[] = new boolean[23];
+  public   boolean [] dias = new boolean[6];
+
+
+
+   public boolean horas[] = new boolean[23];
 
 
     public AreaActividade getArea() {

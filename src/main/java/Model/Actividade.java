@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * @author Espaco de Inovacao
  */
-public class Actividade extends AreaActividade implements Serializable {
+public class Actividade  implements Serializable {
     String nome;
     int numeroDeOcorrencias;
 

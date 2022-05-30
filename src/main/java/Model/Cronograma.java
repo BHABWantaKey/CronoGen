@@ -16,6 +16,7 @@ public class Cronograma implements Serializable {
     Docente[] docente;
     Turma turma;
     Instituicao instituicao;
+    String[] [] tabela= new String[6][23]; // Aqui serão armazenadas as combinações entre docente, área e disponiblidade, onde as posições nos arrays representam o dia e hora pra esssa acividades.
 
 
     public int getCodigo() {

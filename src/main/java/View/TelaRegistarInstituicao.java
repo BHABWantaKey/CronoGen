@@ -4,8 +4,9 @@
  */
 package View;
 
+import Model.AreaActividade;
+import Model.Docente;
 import Model.Instituicao;
-import Model.Turma;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,18 +20,24 @@ import java.util.ArrayList;
  */
 public class TelaRegistarInstituicao extends JFrame implements ActionListener {
 
-
+    ArrayList<AreaActividade> areasActividade = new ArrayList<AreaActividade>();
     //Criação de componentes
     JLabel lbNome = new JLabel("Nome da Instituição");
     JTextField tfNome = new JTextField(30);
 
     JButton btnRegistarInstituicao = new JButton("Criar");
 
+    JList<AreaActividade> listaAreas =new JList<AreaActividade>();
+    JLabel lbAreas= new JLabel("Áreas");
+    JButton btnAddArea= new JButton("Adicionar");
+    JButton btnApagarArea = new JButton("Apagar");
+    JTextField tfAreas = new JTextField();
+    DefaultListModel<AreaActividade> listModel=new DefaultListModel<AreaActividade>();
 
     public TelaRegistarInstituicao() {
 
-        setTitle("Registar Instituição");
-        setSize(350, 200);
+        setTitle("Instituição");
+        setSize(350, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
         setLocationRelativeTo(null);
@@ -44,20 +51,59 @@ public class TelaRegistarInstituicao extends JFrame implements ActionListener {
         tfNome.setBounds(50, 70, 250, 20);
         btnRegistarInstituicao.setBounds(50, 110, 80, 20);
         btnRegistarInstituicao.addActionListener(this);
-
+        listaAreas.setModel(listModel); //Definindo ListModel da lista de Áreas.
+        lbAreas.setBounds(50,150,100,20);
+        listaAreas.setBounds(50,210,180,120);
+        btnApagarArea.setBounds(50,330,80,20);
+        btnAddArea.setBounds(150,170,90,20);
+        btnAddArea.addActionListener(this);
+        tfAreas.setBounds(50,170,90,20);
         //Adicionando compenentes ao painel.
         container.add(lbNome);
         container.add(tfNome);
         container.add(btnRegistarInstituicao);
+        container.add(lbAreas);
+        container.add(listaAreas);
+        container.add(btnAddArea);
+        container.add(btnApagarArea);
+        container.add(tfAreas);
+
+    }
+
+    public void carregarAreas() throws IOException, ClassNotFoundException {
+
+
+        AreaActividade areaActividade = new AreaActividade() {
+        };
+        areasActividade.add(areaActividade);
+        File ficheiro = new File("areas.crono");
+        ObjectInputStream objectoLer = null;
+        try {
+            objectoLer = new ObjectInputStream(new FileInputStream(ficheiro));
+            areasActividade = (ArrayList<AreaActividade>) objectoLer.readObject();
+            objectoLer.close();
+            for (int i = 0; i < areasActividade.size(); i++) {
+
+                areaActividade = areasActividade.get(i);
+                listModel.addElement(areaActividade);
+            }
+            JOptionPane.showMessageDialog(null, "Áreas de actividade carregadas com sucesso");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao carregar a Lista de Áreas de Actividade.");
+            throw new RuntimeException(e);
+        }
 
 
     }
+
 
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
 
         TelaRegistarInstituicao tela = new TelaRegistarInstituicao();
+        tela.carregarAreas();
+
 
     }
 
@@ -82,11 +128,47 @@ public class TelaRegistarInstituicao extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Instituição " + instituicao.getNome() + " registada com sucesso.");
 
             } catch (IOException e) {
-                JOptionPane.showMessageDialog(null, "Ocorreu uma falha ao registar Actividade");
+                JOptionPane.showMessageDialog(null, "Ocorreu uma falha ao registar Instituição");
                 throw new RuntimeException(e);
             }
 
 
-        }
     }
-}
+
+
+        if (accao.getSource() == btnAddArea) {
+
+            AreaActividade areaActividade = new AreaActividade() {
+            };
+
+            areaActividade.setArea(tfAreas.getText());
+
+
+            File ficheiroArea = new File("areas.crono");
+
+            try {
+                ObjectOutputStream objecto = new ObjectOutputStream(new FileOutputStream(ficheiroArea));
+                objecto.writeObject(areaActividade);
+                objecto.close();
+                listModel.addElement(areaActividade);
+
+                ObjectInputStream objectoLer = new ObjectInputStream(new FileInputStream(ficheiroArea));
+                areasActividade = (ArrayList<AreaActividade>) objectoLer.readObject();
+                objectoLer.close();
+
+                listModel.addElement(areaActividade);
+
+                JOptionPane.showMessageDialog(null, "Área de actividade " + areaActividade.getArea() + " registada com sucesso.");
+
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Ocorreu uma falha ao registar Área de actividade");
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+
+
+
+}}
