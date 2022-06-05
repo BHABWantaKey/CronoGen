@@ -4,15 +4,13 @@
  */
 package View;
 
-import Model.AreaActividade;
-import Model.Docente;
+import Model.Cadeira;
 import Model.Instituicao;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.Area;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -21,21 +19,29 @@ import java.util.ArrayList;
  */
 public class TelaRegistarInstituicao extends JFrame implements ActionListener {
 
-    ArrayList<AreaActividade> areasActividade = new ArrayList<AreaActividade>();
+
+
+    JScrollPane scrollPane = new JScrollPane();
+
+    ArrayList<Cadeira> areasActividade = new ArrayList<Cadeira>();
     //Criação de componentes
     JLabel lbNome = new JLabel("Nome da Instituição");
     JTextField tfNome = new JTextField(30);
 
     JButton btnRegistarInstituicao = new JButton("Criar");
 
-    JList<AreaActividade> listaAreas =new JList<AreaActividade>();
+    JList<Cadeira> listaAreas =new JList<Cadeira>();
     JLabel lbAreas= new JLabel("Áreas");
     JButton btnAddArea= new JButton("Adicionar");
     JButton btnApagarArea = new JButton("Apagar");
     JTextField tfAreas = new JTextField();
-    DefaultListModel<AreaActividade> listModel= new DefaultListModel<>();
+    DefaultListModel<Cadeira> listModel= new DefaultListModel<>();
 
     public TelaRegistarInstituicao() {
+
+
+
+
 
         setTitle("Instituição");
         setSize(350, 400);
@@ -59,6 +65,7 @@ public class TelaRegistarInstituicao extends JFrame implements ActionListener {
         btnAddArea.setBounds(150,170,90,20);
         btnAddArea.addActionListener(this);
         tfAreas.setBounds(50,170,90,20);
+        scrollPane.setBounds(50,210,180,120);
         //Adicionando compenentes ao painel.
         container.add(lbNome);
         container.add(tfNome);
@@ -68,24 +75,26 @@ public class TelaRegistarInstituicao extends JFrame implements ActionListener {
         container.add(btnAddArea);
         container.add(btnApagarArea);
         container.add(tfAreas);
-
+        scrollPane.setViewportView(listaAreas);
+        listaAreas.setLayoutOrientation(JList.VERTICAL);
+        container.add(scrollPane);
     }
 
     public void carregarAreas() throws IOException, ClassNotFoundException {
 
 
-        AreaActividade areaActividade = new AreaActividade();
-        areasActividade.add(areaActividade);
-        File ficheiro = new File("areasDeActividade.crono");
+        Cadeira cadeira = new Cadeira();
+        areasActividade.add(cadeira);
+        File ficheiro = new File("cadeiras.crono");
         ObjectInputStream objectoLer = null;
         try {
             objectoLer = new ObjectInputStream(new FileInputStream(ficheiro));
-            areasActividade = (ArrayList<AreaActividade>) objectoLer.readObject();
+            areasActividade = (ArrayList<Cadeira>) objectoLer.readObject();
             objectoLer.close();
             for (int i = 0; i < areasActividade.size(); i++) {
 
-                areaActividade = areasActividade.get(i);
-                listModel.addElement(areaActividade);
+                cadeira = areasActividade.get(i);
+                listModel.addElement(cadeira);
             }
             JOptionPane.showMessageDialog(null, "Áreas de actividade carregadas com sucesso");
         } catch (IOException e) {
@@ -138,14 +147,14 @@ public class TelaRegistarInstituicao extends JFrame implements ActionListener {
 
         if (accao.getSource() == btnAddArea) {
 
-            AreaActividade areaActividade = new AreaActividade();
+            Cadeira cadeira = new Cadeira();
 
-            areaActividade.setArea(tfAreas.getText());
+            cadeira.setArea(tfAreas.getText());
 
 
 
-            areasActividade.add(areaActividade);
-            File ficheiro = new File("areasDeActividade.crono");
+            areasActividade.add(cadeira);
+            File ficheiro = new File("cadeiras.crono");
 
             try {
                 ObjectOutputStream objecto = new ObjectOutputStream(new FileOutputStream(ficheiro));
@@ -154,10 +163,10 @@ public class TelaRegistarInstituicao extends JFrame implements ActionListener {
                 objecto.close();
 
                 ObjectInputStream objectoLer = new ObjectInputStream(new FileInputStream(ficheiro));
-                areasActividade = (ArrayList<AreaActividade>) objectoLer.readObject();
+                areasActividade = (ArrayList<Cadeira>) objectoLer.readObject();
                 objectoLer.close();
 
-                listModel.addElement(areaActividade);
+                listModel.addElement(cadeira);
 
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, "Ocorreu uma falha ao registar Actividade");

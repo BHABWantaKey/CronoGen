@@ -4,8 +4,7 @@
  */
 package View;
 
-import Model.Actividade;
-import Model.AreaActividade;
+import Model.Cadeira;
 import Model.Docente;
 
 import javax.swing.*;
@@ -21,7 +20,7 @@ import java.util.ArrayList;
 public class TelaGerirDocente extends JFrame implements ActionListener {
 
     ArrayList<Docente> docentes = new ArrayList<Docente>();
-    ArrayList<AreaActividade> areasActividade=new ArrayList<>();
+    ArrayList<Cadeira> cadeiras =new ArrayList<>();
     //Criação de componentes e do Painel
     Container container = this.getContentPane();
 
@@ -33,7 +32,7 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
 
 
     JLabel lblArea = new JLabel("Areas");
-    JComboBox<AreaActividade> cbArea = new JComboBox<AreaActividade>();
+    JComboBox<Cadeira> cbArea = new JComboBox<Cadeira>();
 
     JLabel lbDocentes = new JLabel("Lista de Docentes");
 
@@ -41,7 +40,7 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
     JButton btnActualizar = new JButton("Actualizar");
     JButton btnApagar = new JButton("Apagar");
     JList<Docente> listaDocentes = new JList<Docente>();
-
+    JScrollPane scrollPane = new JScrollPane();
 
     DefaultListModel<Docente> listModel = new DefaultListModel<>();
 
@@ -64,6 +63,7 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
         btnActualizar.setBounds(140, 260, 100, 20);
         lbDocentes.setBounds(350, 100, 120, 20);
         listaDocentes.setBounds(350, 120, 160, 180);
+        scrollPane.setBounds(350, 120, 160, 180);
         btnApagar.setBounds(350, 305, 75, 20);
         lblArea.setBounds(30, 200, 150, 20);
         cbArea.setBounds(30, 220, 150, 20);
@@ -81,13 +81,14 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
         //Coluna central
         container.add(lblArea);
         container.add(cbArea);
-
+        container.add(scrollPane);
         //Coluna Este
         container.add(lbDocentes);
         container.add(listaDocentes);
 
         listaDocentes.setModel(listModel);
-
+        scrollPane.setViewportView(listaDocentes);
+        listaDocentes.setLayoutOrientation(JList.VERTICAL);
 
     }
 
@@ -116,24 +117,24 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
 
     }
 
-    public void carregarAreas() throws IOException, ClassNotFoundException {
+    public void carregarCadeiras() throws IOException, ClassNotFoundException {
 
 
-        AreaActividade areaActividade = new AreaActividade();
+        Cadeira cadeira = new Cadeira();
 
 
 
-        areasActividade.add(areaActividade);
+        cadeiras.add(cadeira);
         File ficheiro = new File("areasDeActividade.crono");
         ObjectInputStream objectoLer = null;
         try {
             objectoLer = new ObjectInputStream(new FileInputStream(ficheiro));
-            areasActividade = (ArrayList<AreaActividade>) objectoLer.readObject();
+            cadeiras = (ArrayList<Cadeira>) objectoLer.readObject();
             objectoLer.close();
-            for (int i = 0; i < areasActividade.size(); i++) {
+            for (int i = 0; i < cadeiras.size(); i++) {
 
-                areaActividade = areasActividade.get(i);
-                cbArea.addItem(areaActividade);
+                cadeira = cadeiras.get(i);
+                cbArea.addItem(cadeira);
             }
             JOptionPane.showMessageDialog(null, "Áreas de actividade carregadas com sucesso");
         } catch (IOException e) {
@@ -149,8 +150,9 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
 
 
         TelaGerirDocente tela = new TelaGerirDocente();
+        tela.carregarCadeiras();
         tela.carregarDocentes();
-        tela.carregarAreas();
+
 
     }
 
@@ -164,7 +166,7 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
             docente = listaDocentes.getSelectedValue();
             tfNome.setText(docente.getNome());
             tfEmail.setText(docente.getEmail());
-            cbArea.setSelectedItem(docente.getArea());
+            cbArea.setSelectedItem(docente.getCadeira());
 
         });
 
@@ -173,13 +175,14 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
             Docente docente = new Docente();
             docente.setEmail(tfEmail.getText());
             docente.setNome(tfNome.getText());
-            docente.setArea((AreaActividade) cbArea.getSelectedItem());
+            docente.setCadeira((Cadeira) cbArea.getSelectedItem());
 
 
             docentes.add(docente);
             File ficheiro = new File("docentes.crono");
 
             try {
+
                 ObjectOutputStream objecto = new ObjectOutputStream(new FileOutputStream(ficheiro));
                 objecto.writeObject(docentes);
                 objecto.flush();

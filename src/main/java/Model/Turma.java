@@ -5,6 +5,7 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * @author Espaco de Inovacao
@@ -12,7 +13,8 @@ import java.io.Serializable;
 public class Turma implements Serializable {
     public int codigo;
     public String nome;
-    public Docente[] docentes;
+    public ArrayList<Docente> docentes;
+    public ArrayList<Cadeira> cadeiras;
     public Cronograma cronograma;
 
     @Override
@@ -28,12 +30,21 @@ public class Turma implements Serializable {
         this.nome = nome;
     }
 
-    public Docente[] getDocentes() {
+
+    public ArrayList<Docente> getDocentes() {
         return docentes;
     }
 
-    public void setDocentes(Docente[] docentes) {
+    public void setDocentes(ArrayList<Docente> docentes) {
         this.docentes = docentes;
+    }
+
+    public ArrayList<Cadeira> getCadeiras() {
+        return cadeiras;
+    }
+
+    public void setCadeiras(ArrayList<Cadeira> cadeiras) {
+        this.cadeiras = cadeiras;
     }
 
     public Cronograma getCronograma() {

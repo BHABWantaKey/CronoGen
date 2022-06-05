@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class Cronograma implements Serializable {
     int codigo;
 
-    AreaActividade[] area;
+    Cadeira[] area;
     Docente[] docente;
     Turma turma;
 

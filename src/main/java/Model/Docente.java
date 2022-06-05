@@ -16,16 +16,16 @@ public class Docente extends Pessoa implements Serializable {
         return nome;
     }
 
-    AreaActividade area;
+    Cadeira cadeira;
 
 
 
-    public AreaActividade getArea() {
-        return area;
+    public Cadeira getCadeira() {
+        return cadeira;
     }
 
-    public void setArea(AreaActividade areas) {
-        this.area = areas;
+    public void setCadeira(Cadeira areas) {
+        this.cadeira = areas;
     }
 
 

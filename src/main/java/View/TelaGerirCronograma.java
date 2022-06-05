@@ -10,7 +10,20 @@ import java.awt.*;
  * @author Espaco de Inovacao
  */
 public class TelaGerirCronograma extends JFrame {
-    
+    //Criação de componentes
+    JLabel lbTitulo =new JLabel("Título");
+    JTextField tfTitulo = new JTextField(30);
+    JLabel lbEmail = new JLabel("E-mail");
+    JTextField tfEmail=new JTextField(30);
+    JLabel lbTurma = new JLabel("Turma");
+    JComboBox cbTurmas = new JComboBox<>();
+    JButton btnActualizar = new JButton("Actualizar");
+    JLabel lbListaCronogramas = new JLabel("Lista de Cronogramas");
+    JList listaCronogramas = new JList<>();
+    JButton btnApagar = new JButton("APagar");
+    JButton btnCriarCronograma = new JButton("Gerar");
+    JLabel lbPrevia = new JLabel("Imagem");
+    //Alocação de coordenadas no painel
 
     public TelaGerirCronograma(){
 
@@ -23,20 +36,7 @@ public class TelaGerirCronograma extends JFrame {
         Container container = this.getContentPane();
         container.setLayout(null);
 
-        //Criação de componentes
-        JLabel lbTitulo =new JLabel("Título");
-        JTextField tfTitulo = new JTextField(30);
-        JLabel lbEmail = new JLabel("E-mail");
-        JTextField tfEmail=new JTextField(30);
-        JLabel lbTurma = new JLabel("Turma");
-        JComboBox cbTurmas = new JComboBox<>();
-        JButton btnActualizar = new JButton("Actualizar");
-        JLabel lbListaCronogramas = new JLabel("Lista de Cronogramas");
-        JList listaCronogramas = new JList<>();
-        JButton btnApagar = new JButton("APagar");
-        JButton btnCriarCronograma = new JButton("Gerar");
-        JLabel lbPrevia = new JLabel("Imagem");
-        //Alocação de coordenadas no painel.
+
 
         lbTitulo.setBounds(50,100,250,20);
         tfTitulo.setBounds(50,120,200,20);

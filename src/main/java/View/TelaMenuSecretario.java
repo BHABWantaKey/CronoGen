@@ -89,7 +89,7 @@ public class TelaMenuSecretario extends JFrame implements ActionListener {
             }
 
         } else if (accao.getSource() == btnActividades) {
-            TelaGerirActividades telaGerirActividades = new TelaGerirActividades();
+            TelaRegistarInstituicao telaGerirActividades = new TelaRegistarInstituicao();
         } else if (accao.getSource() == btnRelatorios) {
             TelaRelatorios telaRelatorios = new TelaRelatorios();
 

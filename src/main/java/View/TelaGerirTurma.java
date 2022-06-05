@@ -4,6 +4,7 @@
  */
 package View;
 
+import Model.Cadeira;
 import Model.Turma;
 
 import javax.swing.*;
@@ -19,14 +20,20 @@ import java.util.ArrayList;
 public class TelaGerirTurma extends JFrame implements ActionListener {
 
     ArrayList<Turma> turmas = new ArrayList<Turma>();
+    ArrayList<Cadeira> cadeiras = new ArrayList<Cadeira>();
     //Criação de componentes
     JLabel lbNome = new JLabel("Nome");
     JTextField tfNome = new JTextField(30);
     JButton btnActualizar = new JButton("Actualizar");
     JLabel lbListaDeTurmas = new JLabel("Lista de Turmas");
-    JList<Turma> listaDeTurmas = new JList<Turma>();
+    JComboBox<Turma> listaDeTurmas = new JComboBox<>();
     JButton btnApagar = new JButton("APagar");
     JButton btnCriarTurma = new JButton("Criar");
+    JList listaDeCadeiras= new JList();
+    JLabel lbListaDeCadeiras= new JLabel("Lista de cadeiras");
+    JComboBox<Cadeira> cadeiraJComboBox= new JComboBox<>();
+    JLabel lbCadeira= new JLabel("Cadeiras");
+    JButton btnAssociar = new JButton("Associar");
     DefaultListModel<Turma> listModel = new DefaultListModel();
 
     public TelaGerirTurma() {
@@ -38,7 +45,7 @@ public class TelaGerirTurma extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
 
 
-        setTitle("Gerir Cronogramas");
+        setTitle("Gerir Turmas");
         setSize(550, 320);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
@@ -49,33 +56,44 @@ public class TelaGerirTurma extends JFrame implements ActionListener {
 
 
         //Alocação de coordenadas no painel.
-
-        lbNome.setBounds(50, 100, 250, 20);
-        tfNome.setBounds(50, 120, 250, 20);
-
-        btnCriarTurma.setBounds(50, 240, 80, 20);
+        btnAssociar.setBounds(50,210,100,20);
+        lbNome.setBounds(50, 50, 250, 20);
+        tfNome.setBounds(50, 70, 250, 20);
+        lbListaDeCadeiras.setBounds(350,50,120,20);
+        listaDeCadeiras.setBounds(350,70,150,190);
+        btnCriarTurma.setBounds(50,240, 80, 20);
         btnCriarTurma.addActionListener(this);
-        btnActualizar.setBounds(150, 240, 100, 20);
-        lbListaDeTurmas.setBounds(320, 100, 200, 20);
-        listaDeTurmas.setBounds(320, 120, 200, 120);
-        btnApagar.setBounds(320, 240, 80, 20);
+        btnActualizar.setBounds(150,240, 100, 20);
+        lbListaDeTurmas.setBounds(50,110, 200, 20);
+        listaDeTurmas.setBounds(50,130, 180, 20);
+        btnApagar.setBounds(240,130, 80, 20);
+        lbCadeira.setBounds(50,160,200,20);
+        cadeiraJComboBox.setBounds(50,180,180,20);
+
         //Adicionando compenentes ao painel.
         container.add(lbNome);
         container.add(tfNome);
-
         container.add(btnActualizar);
         container.add(btnApagar);
         container.add(btnCriarTurma);
         container.add(listaDeTurmas);
         container.add(lbListaDeTurmas);
-        listaDeTurmas.setModel(listModel);
-
+        container.add(listaDeCadeiras);
+        container.add(lbListaDeCadeiras);
+        container.add(lbCadeira);
+        container.add(cadeiraJComboBox);
+        container.add(btnAssociar);
     }
+
+
 
     public void carregarTurmas() throws IOException, ClassNotFoundException {
 
 
         Turma turma = new Turma();
+
+
+
         turmas.add(turma);
         File ficheiro = new File("turmas.crono");
         ObjectInputStream objectoLer = null;
@@ -86,11 +104,38 @@ public class TelaGerirTurma extends JFrame implements ActionListener {
             for (int i = 0; i < turmas.size(); i++) {
 
                 turma = turmas.get(i);
-                listModel.addElement(turma);
+                listaDeTurmas.addItem(turma);
             }
-            JOptionPane.showMessageDialog(null, "Turmas carregadas com sucesso.");
+            JOptionPane.showMessageDialog(null, "Turmas carregadas com sucesso");
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao carregar a Lista de turmas.");
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao carregar as turmas");
+            throw new RuntimeException(e);
+        }
+
+
+    }
+    public void carregarCadeiras() throws IOException, ClassNotFoundException {
+
+
+        Cadeira cadeira = new Cadeira();
+
+
+
+        cadeiras.add(cadeira);
+        File ficheiro = new File("areasDeActividade.crono");
+        ObjectInputStream objectoLer = null;
+        try {
+            objectoLer = new ObjectInputStream(new FileInputStream(ficheiro));
+            cadeiras = (ArrayList<Cadeira>) objectoLer.readObject();
+            objectoLer.close();
+            for (int i = 0; i < cadeiras.size(); i++) {
+
+                cadeira = cadeiras.get(i);
+                cadeiraJComboBox.addItem(cadeira);
+            }
+            JOptionPane.showMessageDialog(null, "Áreas de actividade carregadas com sucesso");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao carregar as áreas de actividade.");
             throw new RuntimeException(e);
         }
 
@@ -98,29 +143,26 @@ public class TelaGerirTurma extends JFrame implements ActionListener {
     }
 
 
+
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
 
         TelaGerirTurma tela = new TelaGerirTurma();
         tela.carregarTurmas();
+        tela.carregarCadeiras();
     }
 
 
     @Override
     public void actionPerformed(ActionEvent accao) {
-        listaDeTurmas.getSelectionModel().addListSelectionListener(e -> {
-            Turma turma = new Turma();
-            turma = listaDeTurmas.getSelectedValue();
-            tfNome.setText(turma.getNome());
 
-        });
+
 
         if (accao.getSource() == btnCriarTurma) {
 
             Turma turma = new Turma();
 
             turma.setNome(tfNome.getText());
-            //  docente.setArea((AreaActividade) cbArea.getSelectedItem());
 
 
             turmas.add(turma);

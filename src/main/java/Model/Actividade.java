@@ -64,19 +64,19 @@ public class Actividade  implements Serializable {
         this.noite = noite;
     }
 
-    public AreaActividade getAreaActividade() {
-        return areaActividade;
+    public Cadeira getAreaActividade() {
+        return cadeira;
     }
 
-    public void setAreaActividade(AreaActividade areaActividade) {
-        this.areaActividade = areaActividade;
+    public void setAreaActividade(Cadeira cadeira) {
+        this.cadeira = cadeira;
     }
 
     public void setNumeroDeOcorrencias(int numeroDeOcorrencias) {
         this.numeroDeOcorrencias = numeroDeOcorrencias;
     }
 
-    AreaActividade areaActividade;
+    Cadeira cadeira;
 
     public String getNome() {
         return nome;

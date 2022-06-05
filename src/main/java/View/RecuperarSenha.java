@@ -5,7 +5,14 @@ import java.awt.*;
 
 public class RecuperarSenha extends JFrame {
 
-
+    //Criar componentes para adicionar aos containers
+    JLabel lbCodigo = new JLabel("Código de verificação");
+    JTextField tfCodigo = new JTextField();
+    JLabel lbNovaSenha = new JLabel("Nova senha");
+    JTextField tfNovaSenha = new JTextField();
+    JLabel lbConfirmarSenha = new JLabel("Confirmar Senha");
+    JTextField tfConfirmarSenha = new JTextField();
+    JButton btnConfirmar = new JButton("Confirmar");
 public RecuperarSenha(){
 
     setTitle("Recuperar Senha");
@@ -19,14 +26,7 @@ public RecuperarSenha(){
     Container container =this.getContentPane();
     container.setLayout(null);
 
-    //Criar componentes para adicionar aos containers
-    JLabel lbCodigo = new JLabel("Código de verificação");
-    JTextField tfCodigo = new JTextField();
-    JLabel lbNovaSenha = new JLabel("Nova senha");
-    JTextField tfNovaSenha = new JTextField();
-    JLabel lbConfirmarSenha = new JLabel("Confirmar Senha");
-    JTextField tfConfirmarSenha = new JTextField();
-    JButton btnConfirmar = new JButton("Confirmar");
+
 
     //Alocar componentes no container
 
