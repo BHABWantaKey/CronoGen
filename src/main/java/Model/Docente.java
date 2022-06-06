@@ -24,8 +24,8 @@ public class Docente extends Pessoa implements Serializable {
         return cadeira;
     }
 
-    public void setCadeira(Cadeira areas) {
-        this.cadeira = areas;
+    public void setCadeira(Cadeira cadeira) {
+        this.cadeira = cadeira;
     }
 
 

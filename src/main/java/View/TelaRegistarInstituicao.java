@@ -149,7 +149,7 @@ public class TelaRegistarInstituicao extends JFrame implements ActionListener {
 
             Cadeira cadeira = new Cadeira();
 
-            cadeira.setArea(tfAreas.getText());
+            cadeira.setNomeCadeira(tfAreas.getText());
 
 
 

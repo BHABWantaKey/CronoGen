@@ -14,8 +14,16 @@ public class Turma implements Serializable {
     public int codigo;
     public String nome;
     public ArrayList<Docente> docentes;
-    public ArrayList<Cadeira> cadeiras;
+    public ArrayList<Cadeira> cadeiras = new ArrayList<Cadeira>();
     public Cronograma cronograma;
+
+    public ArrayList<Cadeira> getCadeiras() {
+        return cadeiras;
+    }
+
+    public void setCadeiras(ArrayList<Cadeira> cadeiras) {
+        this.cadeiras = cadeiras;
+    }
 
     @Override
     public String toString() {
@@ -39,13 +47,9 @@ public class Turma implements Serializable {
         this.docentes = docentes;
     }
 
-    public ArrayList<Cadeira> getCadeiras() {
-        return cadeiras;
-    }
 
-    public void setCadeiras(ArrayList<Cadeira> cadeiras) {
-        this.cadeiras = cadeiras;
-    }
+
+
 
     public Cronograma getCronograma() {
         return cronograma;

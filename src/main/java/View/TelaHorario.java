@@ -5,7 +5,8 @@
 
 package View;
 
-import Model.Secretario;
+import Model.Cadeira;
+import Model.Turma;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -17,22 +18,54 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
+import java.util.ArrayList;
+import java.util.Collections;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 public class TelaHorario {
-    private static JTextField textAula;
+    private static JComboBox cbTurmas;
+    ArrayList <Turma> turmas = new ArrayList<>();
 
     public TelaHorario() {
+
+    }
+    public void carregarTurmas() throws IOException, ClassNotFoundException {
+
+
+        Turma turma = new Turma();
+
+
+
+        turmas.add(turma);
+        File ficheiro = new File("turmas.crono");
+        ObjectInputStream objectoLer = null;
+
+        try {
+            objectoLer = new ObjectInputStream(new FileInputStream(ficheiro));
+            turmas = (ArrayList<Turma>) objectoLer.readObject();
+            objectoLer.close();
+            for (int i = 0; i < turmas.size(); i++) {
+
+                turma = turmas.get(i);
+                cbTurmas.addItem(turma);
+            }
+            JOptionPane.showMessageDialog(null, "Turmas carregadas com sucesso");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao carregar as turmas");
+            throw new RuntimeException(e);
+        }
+
+
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+
+        TelaHorario tela= new TelaHorario();
+
+
+
+
         final JTable table = new JTable();
         Object[] columns = new Object[]{"SEG", "TER", "QUA", "QUI", "SEX"};
         final DefaultTableModel model = new DefaultTableModel();
@@ -57,38 +90,68 @@ public class TelaHorario {
         pane.setBackground(Color.BLACK);
         pane.setBounds(10, 10, 721, 364);
         frame.getContentPane().add(pane);
-        textAula = new JTextField();
-        textAula.setBounds(131, 385, 230, 45);
-        frame.getContentPane().add(textAula);
-        textAula.setColumns(10);
-        JLabel lblAula = new JLabel("Aula");
+        cbTurmas = new JComboBox<Turma>();
+        cbTurmas.setBounds(131, 385, 230, 45);
+        frame.getContentPane().add(cbTurmas);
+        JLabel lblAula = new JLabel("Turma");
         lblAula.setFont(new Font("Tahoma", 0, 20));
         lblAula.setBounds(20, 388, 88, 42);
         frame.getContentPane().add(lblAula);
-        JButton btnADD = new JButton("ADD");
+        JButton btnADD = new JButton("Gerar Cronograma");
 
+        tela.carregarTurmas();
         btnADD.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent accao) {
 
-                File ficheiro = new File("Secretario.crono");
+                ArrayList <Cadeira> cadeiras = new ArrayList<>();
+                Turma turma = new Turma();
+                turma= (Turma) cbTurmas.getSelectedItem();
+                cadeiras=turma.cadeiras;
+                cadeiras.add(turma.cadeiras.get(0));
+                cadeiras.add(turma.cadeiras.get(1));
+                cadeiras.add(turma.cadeiras.get(2));
+                cadeiras.add(turma.cadeiras.get(3));
+                cadeiras.add(turma.cadeiras.get(4));
+                cadeiras.add(turma.cadeiras.get(0));
+                cadeiras.add(turma.cadeiras.get(1));
+                cadeiras.add(turma.cadeiras.get(2));
+                cadeiras.add(turma.cadeiras.get(3));
+                cadeiras.add(turma.cadeiras.get(4));
+                Collections.shuffle(cadeiras);
 
-                try {
-                    ObjectInputStream objecto = new ObjectInputStream(new FileInputStream(ficheiro));
-                    Secretario secretario = (Secretario) objecto.readObject();
-                    objecto.close();
+                row[0] = cadeiras.get(0);
+                row[1] = cadeiras.get(1);
+                row[2] = cadeiras.get(2);
+                row[3] = cadeiras.get(3);
+                row[4] = cadeiras.get(4);
+                model.addRow(row);
 
-                    row[0] = secretario.getEmail();
-                    model.addRow(row);
-                    JOptionPane.showMessageDialog(null, "Actividade carregada com sucesso!" + secretario.getNome());
+                row[0] = cadeiras.get(5);
+                row[1] = cadeiras.get(6);
+                row[2] = cadeiras.get(7);
+                row[3] = cadeiras.get(8);
+                row[4] = cadeiras.get(8);
+                model.addRow(row);
 
-                } catch (IOException clique) {
-                    throw new RuntimeException(clique);
-                } catch (ClassNotFoundException ex) {
-                    throw new RuntimeException(ex);
-                }
+                row[0] = cadeiras.get(9);
+                row[1] = cadeiras.get(10);
+                row[2] = cadeiras.get(11);
+                row[3] = cadeiras.get(12);
+                row[4] = cadeiras.get(13);
+                model.addRow(row);
+
+
+
+
+
+                JOptionPane.showMessageDialog(null, "Actividade carregada com sucesso!" );
 
             }
         });
+
+
+
+
         btnADD.setBounds(20, 491, 341, 34);
         frame.getContentPane().add(btnADD);
         JButton btnDELETE = new JButton("DELETE");
@@ -108,5 +171,6 @@ public class TelaHorario {
         frame.getContentPane().add(btnDELETE);
         frame.revalidate();
         frame.setVisible(true);
+
     }
 }

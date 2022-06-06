@@ -34,7 +34,7 @@ public class TelaGerirTurma extends JFrame implements ActionListener {
     JComboBox<Cadeira> cadeiraJComboBox= new JComboBox<>();
     JLabel lbCadeira= new JLabel("Cadeiras");
     JButton btnAssociar = new JButton("Associar");
-    DefaultListModel<Turma> listModel = new DefaultListModel();
+    DefaultListModel<Cadeira> listModel = new DefaultListModel();
 
     public TelaGerirTurma() {
 
@@ -61,6 +61,7 @@ public class TelaGerirTurma extends JFrame implements ActionListener {
         tfNome.setBounds(50, 70, 250, 20);
         lbListaDeCadeiras.setBounds(350,50,120,20);
         listaDeCadeiras.setBounds(350,70,150,190);
+        listaDeCadeiras.setModel(listModel);
         btnCriarTurma.setBounds(50,240, 80, 20);
         btnCriarTurma.addActionListener(this);
         btnActualizar.setBounds(150,240, 100, 20);
@@ -69,7 +70,7 @@ public class TelaGerirTurma extends JFrame implements ActionListener {
         btnApagar.setBounds(240,130, 80, 20);
         lbCadeira.setBounds(50,160,200,20);
         cadeiraJComboBox.setBounds(50,180,180,20);
-
+btnAssociar.addActionListener(this);
         //Adicionando compenentes ao painel.
         container.add(lbNome);
         container.add(tfNome);
@@ -83,6 +84,7 @@ public class TelaGerirTurma extends JFrame implements ActionListener {
         container.add(lbCadeira);
         container.add(cadeiraJComboBox);
         container.add(btnAssociar);
+        btnActualizar.addActionListener(this);
     }
 
 
@@ -97,6 +99,7 @@ public class TelaGerirTurma extends JFrame implements ActionListener {
         turmas.add(turma);
         File ficheiro = new File("turmas.crono");
         ObjectInputStream objectoLer = null;
+        listaDeTurmas.removeAllItems();
         try {
             objectoLer = new ObjectInputStream(new FileInputStream(ficheiro));
             turmas = (ArrayList<Turma>) objectoLer.readObject();
@@ -122,7 +125,7 @@ public class TelaGerirTurma extends JFrame implements ActionListener {
 
 
         cadeiras.add(cadeira);
-        File ficheiro = new File("areasDeActividade.crono");
+        File ficheiro = new File("cadeiras.crono");
         ObjectInputStream objectoLer = null;
         try {
             objectoLer = new ObjectInputStream(new FileInputStream(ficheiro));
@@ -133,11 +136,30 @@ public class TelaGerirTurma extends JFrame implements ActionListener {
                 cadeira = cadeiras.get(i);
                 cadeiraJComboBox.addItem(cadeira);
             }
-            JOptionPane.showMessageDialog(null, "Áreas de actividade carregadas com sucesso");
+            JOptionPane.showMessageDialog(null, "Cadeiras carregadas com sucesso");
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao carregar as áreas de actividade.");
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao carregar as cadeiras.");
             throw new RuntimeException(e);
         }
+
+
+    }
+
+    public void carregarCadeirasDasTurmas() throws IOException, ClassNotFoundException {
+
+
+        Turma turma = new Turma();
+        ArrayList<Cadeira> cadeiras= new ArrayList<Cadeira>();
+        turma= (Turma) listaDeTurmas.getSelectedItem();
+
+        cadeiras = turma.getCadeiras();
+listModel.removeAllElements();
+            JOptionPane.showMessageDialog(null,cadeiras.get(0).getNomeCadeira());
+            for (int i = 0; i < cadeiras.size(); i++) {
+                listModel.addElement(cadeiras.get(i));
+                JOptionPane.showMessageDialog(null,cadeiras.get(i).getNomeCadeira());
+            }
+
 
 
     }
@@ -148,19 +170,61 @@ public class TelaGerirTurma extends JFrame implements ActionListener {
 
 
         TelaGerirTurma tela = new TelaGerirTurma();
-        tela.carregarTurmas();
         tela.carregarCadeiras();
-    }
+        tela.carregarTurmas();
 
+
+    }
 
     @Override
     public void actionPerformed(ActionEvent accao) {
 
+        if (accao.getSource() == btnActualizar) {
+            try {
+                carregarCadeirasDasTurmas();
+                JOptionPane.showMessageDialog(null,"Cadeiras carregadas com sucesso");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
+
+        if (accao.getSource() == btnAssociar){
+            Turma turma;
+            Cadeira cadeira;
+            cadeira=(Cadeira) cadeiraJComboBox.getSelectedItem();
+
+            turma= (Turma) listaDeTurmas.getSelectedItem();
+            turma.cadeiras.add(cadeira);
+
+            JOptionPane.showMessageDialog(null,"Cadeira " + cadeira.getNomeCadeira()+ "Associada a turma"+ turma.getNome());
+            File ficheiro = new File("turmas.crono");
+
+            ObjectOutputStream objecto = null;
+            try {
+                objecto = new ObjectOutputStream(new FileOutputStream(ficheiro));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                objecto.writeObject(turmas);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                objecto.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+
+        }
 
         if (accao.getSource() == btnCriarTurma) {
 
-            Turma turma = new Turma();
+Turma turma= new Turma();
 
             turma.setNome(tfNome.getText());
 
@@ -176,8 +240,9 @@ public class TelaGerirTurma extends JFrame implements ActionListener {
                 ObjectInputStream objectoLer = new ObjectInputStream(new FileInputStream(ficheiro));
                 turmas = (ArrayList<Turma>) objectoLer.readObject();
                 objectoLer.close();
-                listModel.addElement(turma);
+
                 JOptionPane.showMessageDialog(null, "Turma " + turma.getNome() + " registada com sucesso.");
+                carregarTurmas();
 
             } catch (IOException | ClassNotFoundException e) {
                 JOptionPane.showMessageDialog(null, "Ocorreu uma falha ao registar Actividade");
