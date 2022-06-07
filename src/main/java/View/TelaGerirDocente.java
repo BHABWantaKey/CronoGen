@@ -37,7 +37,7 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
     JLabel lbDocentes = new JLabel("Lista de Docentes");
 
     JButton btnAdicionarDocente = new JButton("Adicionar");
-    JButton btnActualizar = new JButton("Actualizar");
+    JButton btnVoltar = new JButton("Voltar");
     JButton btnApagar = new JButton("Apagar");
     JList<Docente> listaDocentes = new JList<Docente>();
     JScrollPane scrollPane = new JScrollPane();
@@ -60,7 +60,7 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
         lbEmail.setBounds(30, 140, 150, 20);
         tfEmail.setBounds(30, 160, 250, 20);
         btnAdicionarDocente.setBounds(30, 260, 100, 20);
-        btnActualizar.setBounds(140, 260, 100, 20);
+        btnVoltar.setBounds(1, 1, 70, 20);
         lbDocentes.setBounds(350, 100, 120, 20);
         listaDocentes.setBounds(350, 120, 160, 180);
         scrollPane.setBounds(350, 120, 160, 180);
@@ -77,7 +77,7 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
         container.add(tfEmail);
         container.add(btnAdicionarDocente);
         container.add(btnApagar);
-        container.add(btnActualizar);
+        container.add(btnVoltar);
         //Coluna central
         container.add(lblArea);
         container.add(cbArea);
@@ -85,7 +85,7 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
         //Coluna Este
         container.add(lbDocentes);
         container.add(listaDocentes);
-
+        btnVoltar.addActionListener(this);
         listaDocentes.setModel(listModel);
         scrollPane.setViewportView(listaDocentes);
         listaDocentes.setLayoutOrientation(JList.VERTICAL);
@@ -125,7 +125,7 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
 
 
         cadeiras.add(cadeira);
-        File ficheiro = new File("areasDeActividade.crono");
+        File ficheiro = new File("cadeiras.crono");
         ObjectInputStream objectoLer = null;
         try {
             objectoLer = new ObjectInputStream(new FileInputStream(ficheiro));
@@ -159,6 +159,10 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent accao) {
+
+        if (accao.getSource() == btnVoltar){
+            this.dispose();
+        TelaMenuSecretario telaMenuSecretario= new TelaMenuSecretario();}
 
 
         listaDocentes.getSelectionModel().addListSelectionListener(e -> {

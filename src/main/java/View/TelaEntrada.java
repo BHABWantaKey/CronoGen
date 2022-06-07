@@ -22,22 +22,17 @@ public class TelaEntrada extends JFrame implements ActionListener {
     JButton btnAjuda = new JButton("Ajuda");
 
     public TelaEntrada() {
-//Criando o frame
+        //Criando o frame
         setTitle("Tela de Entrada");
         setSize(400, 350);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
         setLocationRelativeTo(null);
 
-//Criação de componentes para adicionar ao painel.
-
-
+        //Criação de componentes para adicionar ao painel.
         btnEntrar.addActionListener(this);
-
         Container container = this.getContentPane(); //Cria painel
-
         container.setLayout(null);
-
         lblEmail.setBounds(30, 100, 150, 20);
         lblSenha.setBounds(30, 140, 150, 20);
         btnAjuda.setBounds(284, 290, 100, 20);

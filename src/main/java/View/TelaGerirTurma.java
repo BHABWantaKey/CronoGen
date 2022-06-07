@@ -35,6 +35,7 @@ public class TelaGerirTurma extends JFrame implements ActionListener {
     JLabel lbCadeira= new JLabel("Cadeiras");
     JButton btnAssociar = new JButton("Associar");
     DefaultListModel<Cadeira> listModel = new DefaultListModel();
+    JButton btnVoltar = new JButton("Voltar");
 
     public TelaGerirTurma() {
 
@@ -56,6 +57,7 @@ public class TelaGerirTurma extends JFrame implements ActionListener {
 
 
         //Alocação de coordenadas no painel.
+        btnVoltar.setBounds(1,1,70,20);
         btnAssociar.setBounds(50,210,100,20);
         lbNome.setBounds(50, 50, 250, 20);
         tfNome.setBounds(50, 70, 250, 20);
@@ -71,7 +73,9 @@ public class TelaGerirTurma extends JFrame implements ActionListener {
         lbCadeira.setBounds(50,160,200,20);
         cadeiraJComboBox.setBounds(50,180,180,20);
 btnAssociar.addActionListener(this);
+
         //Adicionando compenentes ao painel.
+        container.add(btnVoltar);
         container.add(lbNome);
         container.add(tfNome);
         container.add(btnActualizar);
@@ -84,6 +88,9 @@ btnAssociar.addActionListener(this);
         container.add(lbCadeira);
         container.add(cadeiraJComboBox);
         container.add(btnAssociar);
+
+        //Adicionando Action listeners aos botões
+        btnVoltar.addActionListener(this);
         btnActualizar.addActionListener(this);
     }
 
@@ -178,6 +185,9 @@ listModel.removeAllElements();
 
     @Override
     public void actionPerformed(ActionEvent accao) {
+
+        if (accao.getSource()==btnVoltar){
+            this.dispose(); TelaMenuSecretario telaMenuSecretario=new TelaMenuSecretario(); this.dispose();}
 
         if (accao.getSource() == btnActualizar) {
             try {

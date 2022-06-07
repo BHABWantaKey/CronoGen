@@ -27,6 +27,7 @@ public class TelaRegistarInstituicao extends JFrame implements ActionListener {
     //Criação de componentes
     JLabel lbNome = new JLabel("Nome da Instituição");
     JTextField tfNome = new JTextField(30);
+    JButton btnVoltar = new JButton("Voltar");
 
     JButton btnRegistarInstituicao = new JButton("Criar");
 
@@ -54,6 +55,7 @@ public class TelaRegistarInstituicao extends JFrame implements ActionListener {
 
 
         //Alocação de coordenadas no painel.
+        btnVoltar.setBounds(1,1,70,20);
         lbNome.setBounds(50, 50, 250, 20);
         tfNome.setBounds(50, 70, 250, 20);
         btnRegistarInstituicao.setBounds(50, 110, 80, 20);
@@ -78,6 +80,8 @@ public class TelaRegistarInstituicao extends JFrame implements ActionListener {
         scrollPane.setViewportView(listaAreas);
         listaAreas.setLayoutOrientation(JList.VERTICAL);
         container.add(scrollPane);
+        container.add(btnVoltar);
+        btnVoltar.addActionListener(this);
     }
 
     public void carregarAreas() throws IOException, ClassNotFoundException {
@@ -119,6 +123,11 @@ public class TelaRegistarInstituicao extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent accao) {
+
+        if (accao.getSource() == btnVoltar){this.dispose();
+        TelaMenuSecretario telaMenuSecretario=new TelaMenuSecretario();}
+
+
         if (accao.getSource() == btnRegistarInstituicao) {
 
             Instituicao instituicao = new Instituicao();

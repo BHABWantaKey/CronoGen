@@ -13,7 +13,7 @@ public class TelaRegistarSecretario extends JFrame implements ActionListener {
 
     ArrayList <Secretario> secretarios =new ArrayList<>();
 
-
+    JButton btnVoltar = new JButton("Voltar");
     //Criação de componentes para adicionar ao painel.
     JLabel lbNome = new JLabel("Nome");
     JTextField tfNome = new JTextField(50);
@@ -45,7 +45,7 @@ public class TelaRegistarSecretario extends JFrame implements ActionListener {
         lblSenha.setBounds(30, 180, 150, 20);
         tfSenha.setBounds(70, 180, 250, 20);
         btnEntrar.setBounds(70, 220, 100, 20);
-
+        btnVoltar.setBounds(1,1,70,20);
 
         //Adicionando os componentes ao container.
         container.add(btnEntrar);
@@ -55,6 +55,7 @@ public class TelaRegistarSecretario extends JFrame implements ActionListener {
         container.add(tfSenha);
         container.add(lbEmail);
         container.add(tfEmail);
+        container.add(btnVoltar);
         //Colocando botões em prontidão
         btnEntrar.addActionListener(this);
 
@@ -73,6 +74,9 @@ public class TelaRegistarSecretario extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent accao) {
+if (accao.getSource()==btnVoltar)
+{this.dispose(); TelaMenuSecretario telaMenuSecretario= new TelaMenuSecretario();}
+
 
         if (accao.getSource() == btnEntrar) {
 
@@ -91,7 +95,7 @@ public class TelaRegistarSecretario extends JFrame implements ActionListener {
             secretario.setSenha(String.valueOf(tfSenha.getPassword()));
 
             //Por implementar envio de dados por E-mail antes de encerrar a tela.
-            if (tfEmail.getText() != "" && tfNome.getText() != "" && tfSenha.getText() != "") {
+            if (tfEmail.getText().length()>6 && tfNome.getText().length()>2 && tfSenha.getText().length()>7) {
                 try {
                     secretarios.add(secretario);
                     //bloco para detecção de erros/excepções.
@@ -105,7 +109,7 @@ public class TelaRegistarSecretario extends JFrame implements ActionListener {
                 } catch (IOException e) {
                     JOptionPane.showMessageDialog(null, "Occorreu um erro ao Registar o secretário.");
                 }
-            } else if  (tfEmail.getText().isEmpty()  && tfNome.getText().isEmpty() && tfSenha.getText().isEmpty()) {
+            } else if  (tfEmail.getText().length()==0  && tfNome.getText().length()==0 && tfSenha.getText().length()==0) {
                 JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos");
             }
 

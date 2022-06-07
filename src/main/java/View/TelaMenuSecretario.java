@@ -69,8 +69,8 @@ public class TelaMenuSecretario extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
 
-
         TelaMenuSecretario tela = new TelaMenuSecretario();
+
     }
 
 
@@ -82,6 +82,8 @@ public class TelaMenuSecretario extends JFrame implements ActionListener {
             TelaGerirDocente telaGerirDocente = new TelaGerirDocente();
             try {
                 telaGerirDocente.carregarDocentes();
+                telaGerirDocente.carregarCadeiras();
+                this.dispose();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } catch (ClassNotFoundException e) {
@@ -90,6 +92,13 @@ public class TelaMenuSecretario extends JFrame implements ActionListener {
 
         } else if (accao.getSource() == btnActividades) {
             TelaRegistarInstituicao telaGerirActividades = new TelaRegistarInstituicao();
+            try {
+                telaGerirActividades.carregarAreas(); this.dispose();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
         } else if (accao.getSource() == btnRelatorios) {
             TelaRelatorios telaRelatorios = new TelaRelatorios();
 
@@ -98,6 +107,7 @@ public class TelaMenuSecretario extends JFrame implements ActionListener {
             TelaEntrada telaEntrada = new TelaEntrada();
         } else if (accao.getSource() == btnCriarCronogramas) {
             TelaHorario telaHorario = new TelaHorario();
+
         } else if (accao.getSource() == btnCronogramas) {
             TelaGerirCronograma telaGerirCronograma = new TelaGerirCronograma();
         } else if (accao.getSource() == btnTurmas) {

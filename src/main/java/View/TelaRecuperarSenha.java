@@ -5,6 +5,11 @@ import java.awt.*;
 
 public class TelaRecuperarSenha extends JFrame {
 
+    //Criar componentes para adicionar aos containers
+    JLabel lbEmail = new JLabel("Email de recuperação");
+    JTextField tfEMail = new JTextField();
+    JButton btnEnviarPedido = new JButton("Enviar Pedido");
+
 
 public TelaRecuperarSenha(){
 
@@ -19,10 +24,7 @@ public TelaRecuperarSenha(){
     Container container =this.getContentPane();
     container.setLayout(null);
 
-    //Criar componentes para adicionar aos containers
-    JLabel lbEmail = new JLabel("Email de recuperação");
-    JTextField tfEMail = new JTextField();
-    JButton btnEnviarPedido = new JButton("Enviar Pedido");
+
 
     //Alocar componentes no container
 
