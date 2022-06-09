@@ -19,7 +19,7 @@ public class Cronograma implements Serializable {
 
 
 
-    public void gerarCronograma(boolean dia, boolean tempo, Actividade actividade [][]){
+    public void gerarCronograma(boolean dia, boolean tempo, Cadeira cadeira[][]){
 
 
 
