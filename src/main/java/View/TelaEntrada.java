@@ -62,10 +62,13 @@ public class TelaEntrada extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent accao) {
+
+
         if (accao.getSource() == btnEntrar) {
             File ficheiro = new File("Secretarios.crono");
 
-            try {
+            if ( ficheiro.exists()==true ||ficheiro.length()==0){   try {
+
                 ObjectInputStream objecto = new ObjectInputStream(new FileInputStream(ficheiro));
                 secretarios = (ArrayList<Secretario>) objecto.readObject();
                 objecto.close();
@@ -73,15 +76,22 @@ public class TelaEntrada extends JFrame implements ActionListener {
                 int i=0;
                 TelaMenuSecretario telaMenuSecretario;
                 boolean status=false;
-                for (i=0;i<secretarios.size();i++){
-                    secretario=secretarios.get(i);
-                    if (secretario.getEmail().equalsIgnoreCase(tfEmail.getText()) && secretario.getSenha().equalsIgnoreCase(tfSenha.getText())){
-                        JOptionPane.showMessageDialog(null,"Sessão iniciada como "+ secretario.getNome());
-                        this.dispose();   new TelaMenuSecretario(); status=true;
+                for (i=0;i<secretarios.size();i++) {
+                    secretario = secretarios.get(i);
 
-                    }
+                        if (secretario.getEmail().equalsIgnoreCase(tfEmail.getText()) && secretario.getSenha().equalsIgnoreCase(tfSenha.getText())) {
+                            JOptionPane.showMessageDialog(null, "Sessão iniciada como " + secretario.getNome());
+                            this.dispose();
+                            new TelaMenuSecretario();
+                            status = true;
 
-                }if (tfEmail.getText()!=secretario.getEmail() && tfSenha.getText()!=secretario.getSenha()); JOptionPane.showMessageDialog(null,"Credênciais incorrectas, tente novamente!"); ;
+                        } else if (tfEmail.getText() != secretario.getEmail() && tfSenha.getText() != secretario.getSenha()) {
+                            JOptionPane.showMessageDialog(null, "Credênciais incorrectas, tente novamente!");
+                        } else if (tfEmail.getText().length() == 0 || tfSenha.getText().length() == 0) {
+                            JOptionPane.showMessageDialog(null, "Por favor Preencha todos os campos");
+                        }
+
+                }
 
 
             } catch (IOException e) {
@@ -89,6 +99,9 @@ public class TelaEntrada extends JFrame implements ActionListener {
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
+
+
+            } else {JOptionPane.showMessageDialog(null,"Por favor registe pelo menos um funcionário.");}
 
 
         }

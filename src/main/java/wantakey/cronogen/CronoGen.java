@@ -5,6 +5,12 @@
 
 package wantakey.cronogen;
 
+import View.TelaEntrada;
+import View.TelaRegistarSecretario;
+
+import javax.swing.*;
+import java.io.File;
+
 /**
  *
  * @author Espaco de Inovacao
@@ -12,6 +18,24 @@ package wantakey.cronogen;
 public class CronoGen {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+       //Adiciona Look And feel ao sistema
+        try {
+            UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (UnsupportedLookAndFeelException e) {
+            throw new RuntimeException(e);
+        }
+
+        File secretariosFicheiro = new File("Secretarios.crono");
+        if (secretariosFicheiro.exists()==false){
+        TelaRegistarSecretario telaRegistarSecretario = new TelaRegistarSecretario();} else {
+            TelaEntrada telaEntrada=new TelaEntrada();
+        }
+
     }
 }

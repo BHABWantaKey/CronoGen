@@ -19,6 +19,9 @@ import java.util.ArrayList;
  */
 public class TelaGerirTurma extends JFrame implements ActionListener {
 
+
+
+
     ArrayList<Turma> turmas = new ArrayList<Turma>();
     ArrayList<Cadeira> cadeiras = new ArrayList<Cadeira>();
     //Criação de componentes
@@ -38,7 +41,14 @@ public class TelaGerirTurma extends JFrame implements ActionListener {
     JButton btnVoltar = new JButton("Voltar");
 
     public TelaGerirTurma() {
-
+        try {
+            carregarTurmas();
+            carregarCadeiras();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         setTitle("Gerir Turma");
         setSize(400, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

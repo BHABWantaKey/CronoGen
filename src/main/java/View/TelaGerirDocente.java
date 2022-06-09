@@ -53,6 +53,7 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
 
 
+
         container.setLayout(null);
         btnAdicionarDocente.addActionListener(this);
         lblNome.setBounds(30, 100, 150, 20);
@@ -152,6 +153,7 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
         TelaGerirDocente tela = new TelaGerirDocente();
         tela.carregarCadeiras();
         tela.carregarDocentes();
+
 
 
     }

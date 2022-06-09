@@ -40,8 +40,13 @@ public class TelaRegistarInstituicao extends JFrame implements ActionListener {
 
     public TelaRegistarInstituicao() {
 
-
-
+        try {
+            carregarAreas();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
 
         setTitle("Instituição");

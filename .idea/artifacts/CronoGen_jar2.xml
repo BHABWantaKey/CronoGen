@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="CronoGen:jar2">
+    <output-path>$PROJECT_DIR$/out/artifacts/CronoGen_jar2</output-path>
+    <root id="archive" name="CronoGen.jar">
+      <element id="module-output" name="CronoGen" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Bibliotecas/Aparencia/JTattooDemo/JTattooDemo.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
