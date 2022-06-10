@@ -5,6 +5,7 @@
 package View;
 
 import Model.Cadeira;
+import Model.Docente;
 import Model.Turma;
 
 import javax.swing.*;
@@ -14,9 +15,7 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 
-/**
- * @author Espaco de Inovacao
- */
+
 public class TelaGerirTurma extends JFrame implements ActionListener {
 
 
@@ -29,7 +28,7 @@ public class TelaGerirTurma extends JFrame implements ActionListener {
     JTextField tfNome = new JTextField(30);
     JButton btnActualizar = new JButton("Actualizar");
     JLabel lbListaDeTurmas = new JLabel("Lista de Turmas");
-    JComboBox<Turma> listaDeTurmas = new JComboBox<>();
+    JComboBox<Turma> listaDeTurmas = new JComboBox<Turma>();
     JButton btnApagar = new JButton("APagar");
     JButton btnCriarTurma = new JButton("Criar");
     JList listaDeCadeiras= new JList();
@@ -41,14 +40,7 @@ public class TelaGerirTurma extends JFrame implements ActionListener {
     JButton btnVoltar = new JButton("Voltar");
 
     public TelaGerirTurma() {
-        try {
-            carregarTurmas();
-            carregarCadeiras();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+
         setTitle("Gerir Turma");
         setSize(400, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -79,7 +71,7 @@ public class TelaGerirTurma extends JFrame implements ActionListener {
         btnActualizar.setBounds(150,240, 100, 20);
         lbListaDeTurmas.setBounds(50,110, 200, 20);
         listaDeTurmas.setBounds(50,130, 180, 20);
-        btnApagar.setBounds(240,130, 80, 20);
+        btnApagar.setBounds(240,130, 98, 20);btnApagar.setIconTextGap(5);
         lbCadeira.setBounds(50,160,200,20);
         cadeiraJComboBox.setBounds(50,180,180,20);
 btnAssociar.addActionListener(this);
@@ -98,10 +90,12 @@ btnAssociar.addActionListener(this);
         container.add(lbCadeira);
         container.add(cadeiraJComboBox);
         container.add(btnAssociar);
-
+        btnVoltar.setIcon((new ImageIcon("")));
+        btnApagar.setIcon(new ImageIcon("Imagens/clear.png"));
         //Adicionando Action listeners aos botões
         btnVoltar.addActionListener(this);
         btnActualizar.addActionListener(this);
+        btnApagar.addActionListener(this);
     }
 
 
@@ -117,13 +111,16 @@ btnAssociar.addActionListener(this);
         File ficheiro = new File("turmas.crono");
         ObjectInputStream objectoLer = null;
         listaDeTurmas.removeAllItems();
+        if (ficheiro.exists()==true)
         try {
+            listaDeTurmas.removeAllItems();
             objectoLer = new ObjectInputStream(new FileInputStream(ficheiro));
             turmas = (ArrayList<Turma>) objectoLer.readObject();
             objectoLer.close();
             for (int i = 0; i < turmas.size(); i++) {
 
                 turma = turmas.get(i);
+                turma.setCodigo(i);
                 listaDeTurmas.addItem(turma);
             }
             JOptionPane.showMessageDialog(null, "Turmas carregadas com sucesso");
@@ -151,6 +148,7 @@ btnAssociar.addActionListener(this);
             for (int i = 0; i < cadeiras.size(); i++) {
 
                 cadeira = cadeiras.get(i);
+                cadeira.setCodigo(i);
                 cadeiraJComboBox.addItem(cadeira);
             }
             JOptionPane.showMessageDialog(null, "Cadeiras carregadas com sucesso");
@@ -195,6 +193,13 @@ listModel.removeAllElements();
 
     @Override
     public void actionPerformed(ActionEvent accao) {
+
+
+
+
+
+
+
 
         if (accao.getSource()==btnVoltar){
             this.dispose(); TelaMenuSecretario telaMenuSecretario=new TelaMenuSecretario(); this.dispose();}
@@ -271,5 +276,35 @@ Turma turma= new Turma();
 
 
         }
+
+        //Accões para o botão que serve para apagar turma
+        if (accao.getSource() == btnApagar){
+
+            Turma turma = new Turma();
+            turma= (Turma) listaDeTurmas.getSelectedItem();
+            turmas.remove(turma.getCodigo());
+            JOptionPane.showMessageDialog(null,"Turma "+turma.getNome()+" removida com sucesso");
+
+            File ficheiro = new File("turmas.crono");
+
+            try {
+                ObjectOutputStream objecto = new ObjectOutputStream(new FileOutputStream(ficheiro));
+                objecto.writeObject(turmas);
+                objecto.flush();
+                objecto.close();
+                carregarTurmas();
+
+
+
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Falha ao apagar turma!");
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
+
+        }
+
     }
 }

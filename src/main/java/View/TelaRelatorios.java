@@ -5,10 +5,7 @@
 package View;
 import javax.swing.*;
 
-/**
- *
- * @author Espaco de Inovacao
- */
+
 public class TelaRelatorios extends JFrame {
 
     public TelaRelatorios(){

@@ -17,17 +17,6 @@ public class Cronograma implements Serializable {
     Turma turma;
 
 
-
-
-    public void gerarCronograma(boolean dia, boolean tempo, Cadeira cadeira[][]){
-
-
-
-
-
-
-
-    }
     public int getCodigo() {
         return codigo;
     }

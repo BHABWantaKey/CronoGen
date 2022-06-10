@@ -18,6 +18,16 @@ public class Docente extends Pessoa implements Serializable {
 
     Cadeira cadeira;
 
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    int codigo;
+
 
 
     public Cadeira getCadeira() {

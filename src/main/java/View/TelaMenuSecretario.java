@@ -10,9 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-/**
- * @author Espaco de Inovacao
- */
+
 public class TelaMenuSecretario extends JFrame implements ActionListener {
 
     JButton btnDocentes = new JButton("Docentes");
@@ -37,12 +35,12 @@ public class TelaMenuSecretario extends JFrame implements ActionListener {
 
         btnDocentes.setBounds(50, 50, 120, 50);
         btnCadeiras.setBounds(200, 50, 120, 50);
-        btnCronogramas.setBounds(350, 50, 120, 50);
+        btnCronogramas.setBounds(350, 50, 125, 50);
         btnCriarCronogramas.setBounds(50, 200, 120, 50);
         btnTurmas.setBounds(200, 200, 120, 50);
         btnRelatorios.setBounds(350, 200, 120, 50);
         btnSair.setBounds(470, 330, 103, 30);
-
+        btnDocentes.setIcon(new ImageIcon("Imagens/teacher.png"));
         //Adicionando ActionListenners aos botões
         btnDocentes.addActionListener(this);
         btnCadeiras.addActionListener(this);
@@ -60,7 +58,13 @@ public class TelaMenuSecretario extends JFrame implements ActionListener {
         container.add(btnRelatorios);
         container.add(btnSair);
 
-
+        //Adicionando Imagens ao botões.
+        btnCadeiras.setIcon(new ImageIcon("Imagens/book.png"));
+        btnCronogramas.setIcon(new ImageIcon("Imagens/time.png"));
+        btnRelatorios.setIcon(new ImageIcon("Imagens/analytics.png"));
+        btnSair.setIcon(new ImageIcon("Imagens/logout.png"));
+        btnCriarCronogramas.setIcon(new ImageIcon("Imagens/calendar.png"));
+        btnTurmas.setIcon(new ImageIcon("Imagens/class.png"));
     }
 
 
@@ -81,7 +85,6 @@ public class TelaMenuSecretario extends JFrame implements ActionListener {
             //Tela para Gestão de Cadeiras e Instituição.
         } else if (accao.getSource() == btnCadeiras) {
             TelaRegistarInstituicao telaGerirActividades = new TelaRegistarInstituicao();
-
 
              //Abre tela de relatórios.
         } else if (accao.getSource() == btnRelatorios) {

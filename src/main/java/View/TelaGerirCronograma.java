@@ -5,10 +5,7 @@
 package View;
 import javax.swing.*;
 import java.awt.*;
-/**
- *
- * @author Espaco de Inovacao
- */
+
 public class TelaGerirCronograma extends JFrame {
     //Criação de componentes
     JLabel lbTitulo =new JLabel("Título");

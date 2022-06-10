@@ -14,9 +14,7 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 
-/**
- * @author Espaco de Inovacao
- */
+
 public class TelaGerirDocente extends JFrame implements ActionListener {
 
     ArrayList<Docente> docentes = new ArrayList<Docente>();
@@ -87,6 +85,7 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
         container.add(lbDocentes);
         container.add(listaDocentes);
         btnVoltar.addActionListener(this);
+        btnApagar.addActionListener(this);
         listaDocentes.setModel(listModel);
         scrollPane.setViewportView(listaDocentes);
         listaDocentes.setLayoutOrientation(JList.VERTICAL);
@@ -95,18 +94,20 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
 
     public void carregarDocentes() throws IOException, ClassNotFoundException {
 
-        //ArrayList<Docente> docentes = new ArrayList<Docente>();
+
         Docente docente = new Docente();
         docentes.add(docente);
         File ficheiro = new File("docentes.crono");
         ObjectInputStream objectoLer = null;
         try {
+            listModel.removeAllElements();
             objectoLer = new ObjectInputStream(new FileInputStream(ficheiro));
             docentes = (ArrayList<Docente>) objectoLer.readObject();
             objectoLer.close();
             for (int i = 0; i < docentes.size(); i++) {
 
                 docente = docentes.get(i);
+                docente.setCodigo(i);
                 listModel.addElement(docente);
             }
             JOptionPane.showMessageDialog(null, "Docentes carregados com sucesso");
@@ -135,6 +136,7 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
             for (int i = 0; i < cadeiras.size(); i++) {
 
                 cadeira = cadeiras.get(i);
+                cadeira.setCodigo(i);
                 cbArea.addItem(cadeira);
             }
             JOptionPane.showMessageDialog(null, "Áreas de actividade carregadas com sucesso");
@@ -168,11 +170,14 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
 
 
         listaDocentes.getSelectionModel().addListSelectionListener(e -> {
-            Docente docente = new Docente();
-            docente = listaDocentes.getSelectedValue();
-            tfNome.setText(docente.getNome());
-            tfEmail.setText(docente.getEmail());
-            cbArea.setSelectedItem(docente.getCadeira());
+            try {
+                Docente docente = new Docente();
+                docente = listaDocentes.getSelectedValue();
+                tfNome.setText(docente.getNome());
+                tfEmail.setText(docente.getEmail());
+                cbArea.setSelectedItem(docente.getCadeira());
+            } catch (Exception exception){}
+
 
         });
 
@@ -210,5 +215,36 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
 
 
         }
+
+
+        //Acção do botão para apagar docentes
+        if (accao.getSource() == btnApagar){
+
+            Docente docente = new Docente();
+            docente= listaDocentes.getSelectedValue();
+            docentes.remove(docente.getCodigo());
+            JOptionPane.showMessageDialog(null,"Docente "+docente.getNome()+" removido com sucesso");
+
+            File ficheiro = new File("docentes.crono");
+
+            try {
+                ObjectOutputStream objecto = new ObjectOutputStream(new FileOutputStream(ficheiro));
+                objecto.writeObject(docentes);
+                objecto.flush();
+                objecto.close();
+                carregarDocentes();
+
+
+
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Falha ao apagar docente!");
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
+
+        }
+
     }
 }

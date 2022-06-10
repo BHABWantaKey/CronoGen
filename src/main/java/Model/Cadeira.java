@@ -12,6 +12,15 @@ import java.io.Serializable;
 public class Cadeira implements Serializable {
     String nome;
 
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    int codigo;
     public String getNomeCadeira() {
         return nome;
     }

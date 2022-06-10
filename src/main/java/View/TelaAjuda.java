@@ -5,10 +5,7 @@
 package View;
 import javax.swing.*;
 
-/**
- *
- * @author Espaco de Inovacao
- */
+
 public class TelaAjuda extends JFrame{
     
     

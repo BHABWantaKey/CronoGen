@@ -12,7 +12,7 @@ import javax.swing.*;
 public class TelaEntrada extends JFrame implements ActionListener {
 
     ArrayList<Secretario> secretarios=new ArrayList<>();
-
+    JLabel lblImage= new JLabel();
     JLabel lblEmail = new JLabel("E-mail");
     JTextField tfEmail = new JTextField(50);
     JLabel lblSenha = new JLabel("Senha");
@@ -24,18 +24,20 @@ public class TelaEntrada extends JFrame implements ActionListener {
     public TelaEntrada() {
         //Criando o frame
         setTitle("Tela de Entrada");
-        setSize(400, 350);
+        setSize(400, 275);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
         setLocationRelativeTo(null);
 
-        //Criação de componentes para adicionar ao painel.
+        //Configuração de componentes para adicionar ao painel.
+        lblImage.setIcon(new ImageIcon("Imagens/user.png"));
+        lblImage.setBounds(160,15,80,65);
         btnEntrar.addActionListener(this);
         Container container = this.getContentPane(); //Cria painel
         container.setLayout(null);
         lblEmail.setBounds(30, 100, 150, 20);
         lblSenha.setBounds(30, 140, 150, 20);
-        btnAjuda.setBounds(284, 290, 100, 20);
+        btnAjuda.setBounds(284, 220, 100, 20);
         btnEntrar.setBounds(30, 180, 150, 20);
         tfEmail.setBounds(70, 100, 250, 20);
         tfSenha.setBounds(70, 140, 250, 20);
@@ -48,6 +50,7 @@ public class TelaEntrada extends JFrame implements ActionListener {
         container.add(lblSenha);
         container.add(tfEmail);
         container.add(tfSenha);
+        container.add(lblImage);
 
 
     }
