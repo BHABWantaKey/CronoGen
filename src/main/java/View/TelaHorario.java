@@ -6,14 +6,12 @@
 package View;
 
 import Model.Cadeira;
+import Model.Cronograma;
 import Model.Turma;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.*;
@@ -23,6 +21,7 @@ public class TelaHorario extends JFrame implements ActionListener{
 
 
     //Criando Componentes
+    JButton btnGuardarCronograma = new JButton("Guardar");
     Container container = this.getContentPane(); //Cria painel
 
     DefaultTableModel model = new DefaultTableModel();
@@ -67,13 +66,7 @@ public class TelaHorario extends JFrame implements ActionListener{
     }
     public  TelaHorario()
     {
-        try {
-            carregarTurmas();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+
         //Configurando frame componentes
         setTitle("Horário");
         setBackground(Color.WHITE);
@@ -104,7 +97,7 @@ public class TelaHorario extends JFrame implements ActionListener{
         btnVoltar.setBounds(1,1,70,20);
         btnADD.setBounds(20, 220, 200, 20);
         pane.setBounds(10, 50, 721, 120);
-
+        btnGuardarCronograma.setBounds(240,220,80,20);
 
         //adicionando componentes a tela
         container.add(cbTurmas);
@@ -112,7 +105,7 @@ public class TelaHorario extends JFrame implements ActionListener{
         container.add(lblAula);
         container.add(btnADD);
         container.add(btnVoltar);
-
+        container.add(btnGuardarCronograma);
         //Adicionando action listenners aos componentes
         btnADD.addActionListener(this);
         btnVoltar.addActionListener(this);
@@ -128,7 +121,7 @@ public class TelaHorario extends JFrame implements ActionListener{
 
         TelaHorario tela=new TelaHorario();
         tela.setVisible(true);
-
+        tela.carregarTurmas();
 
 
 
@@ -139,7 +132,8 @@ public class TelaHorario extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent accao) {
-
+        Turma turmaCrono = null;
+        ArrayList<Cadeira> cadeirasCrono= new ArrayList<>();
         if (accao.getSource() == btnVoltar){ this.dispose();
             TelaMenuSecretario telaMenuSecretario= new TelaMenuSecretario();}
         if (accao.getSource()==btnADD){ArrayList<Cadeira> cadeiras = new ArrayList<>();
@@ -157,6 +151,7 @@ public class TelaHorario extends JFrame implements ActionListener{
             cadeiras.add(turma.cadeiras.get(3));
             cadeiras.add(turma.cadeiras.get(4));
             Collections.shuffle(cadeiras);
+            table.removeAll();
 
             row[0] = cadeiras.get(0);
             row[1] = cadeiras.get(1);
@@ -179,8 +174,33 @@ public class TelaHorario extends JFrame implements ActionListener{
             row[4] = cadeiras.get(14);
             model.addRow(row);
 
-
+            turmaCrono=turma;
+            cadeirasCrono=cadeiras;
             JOptionPane.showMessageDialog(null, "Actividade carregada com sucesso!");
+
+        }
+        if (accao.getSource()==btnGuardarCronograma){
+            Cronograma cronograma =new Cronograma();
+            cronograma.setTurma(turmaCrono);
+            cronograma.cadeiras= cadeirasCrono;
+            cronograma.setNome(turmaCrono.getNome()+" Horário");
+            File ficheiro = new File("cronogramas.crono");
+
+
+            ObjectOutputStream objecto = null;
+            try {
+                objecto = new ObjectOutputStream(new FileOutputStream(ficheiro));
+                objecto.writeObject(cronograma);
+                objecto.close();
+                turmaCrono.setCronograma(cronograma);
+                JOptionPane.showMessageDialog(null,"Cronograma guardado com sucesso!");
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null,"Erro ao salvar Cronograma");
+                throw new RuntimeException(e);
+
+            }
+
+
 
         }
         }

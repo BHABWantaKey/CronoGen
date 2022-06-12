@@ -84,7 +84,7 @@ public class TelaMenuSecretario extends JFrame implements ActionListener {
 
             //Tela para Gestão de Cadeiras e Instituição.
         } else if (accao.getSource() == btnCadeiras) {
-            TelaRegistarInstituicao telaGerirActividades = new TelaRegistarInstituicao();
+            TelaGerirDepartamento telaGerirActividades = new TelaGerirDepartamento();
 
              //Abre tela de relatórios.
         } else if (accao.getSource() == btnRelatorios) {
@@ -110,6 +110,14 @@ public class TelaMenuSecretario extends JFrame implements ActionListener {
             //Abre tela para gestão de turmas.
         } else if (accao.getSource() == btnTurmas) {
             TelaGerirTurma telaGerirTurma = new TelaGerirTurma();
+            try {
+                telaGerirTurma.carregarTurmas();telaGerirTurma.carregarCadeiras();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
             this.dispose();
         }
 

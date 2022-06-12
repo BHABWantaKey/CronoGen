@@ -13,8 +13,8 @@ public class TelaEntrada extends JFrame implements ActionListener {
 
     ArrayList<Secretario> secretarios=new ArrayList<>();
     JLabel lblImage= new JLabel();
-    JLabel lblEmail = new JLabel("E-mail");
-    JTextField tfEmail = new JTextField(50);
+    JLabel lbUsuario = new JLabel("Usuário");
+    JTextField tfUsuario = new JTextField(50);
     JLabel lblSenha = new JLabel("Senha");
     JPasswordField tfSenha = new JPasswordField(20);
     JButton btnEntrar = new JButton("Entrar");
@@ -35,20 +35,20 @@ public class TelaEntrada extends JFrame implements ActionListener {
         btnEntrar.addActionListener(this);
         Container container = this.getContentPane(); //Cria painel
         container.setLayout(null);
-        lblEmail.setBounds(30, 100, 150, 20);
+        lbUsuario.setBounds(30, 100, 150, 20);
         lblSenha.setBounds(30, 140, 150, 20);
         btnAjuda.setBounds(284, 220, 100, 20);
         btnEntrar.setBounds(30, 180, 150, 20);
-        tfEmail.setBounds(70, 100, 250, 20);
+        tfUsuario.setBounds(70, 100, 250, 20);
         tfSenha.setBounds(70, 140, 250, 20);
         btnRecuperarSenha.setBounds(200, 180, 135, 20);
 
         container.add(btnAjuda);
         container.add(btnEntrar);
         container.add(btnRecuperarSenha);
-        container.add(lblEmail);
+        container.add(lbUsuario);
         container.add(lblSenha);
-        container.add(tfEmail);
+        container.add(tfUsuario);
         container.add(tfSenha);
         container.add(lblImage);
 
@@ -82,15 +82,15 @@ public class TelaEntrada extends JFrame implements ActionListener {
                 for (i=0;i<secretarios.size();i++) {
                     secretario = secretarios.get(i);
 
-                        if (secretario.getEmail().equalsIgnoreCase(tfEmail.getText()) && secretario.getSenha().equalsIgnoreCase(tfSenha.getText())) {
+                        if (secretario.getUsuario().equalsIgnoreCase(tfUsuario.getText()) && secretario.getSenha().equalsIgnoreCase(tfSenha.getText())) {
                             JOptionPane.showMessageDialog(null, "Sessão iniciada como " + secretario.getNome());
                             this.dispose();
                             new TelaMenuSecretario();
                             status = true;
 
-                        } else if (tfEmail.getText() != secretario.getEmail() && tfSenha.getText() != secretario.getSenha()) {
+                        } else if (tfUsuario.getText() != secretario.getUsuario() && tfSenha.getText() != secretario.getSenha()) {
                             JOptionPane.showMessageDialog(null, "Credênciais incorrectas, tente novamente!");
-                        } else if (tfEmail.getText().length() == 0 || tfSenha.getText().length() == 0) {
+                        } else if (tfUsuario.getText().length() == 0 || tfSenha.getText().length() == 0) {
                             JOptionPane.showMessageDialog(null, "Por favor Preencha todos os campos");
                         }
 

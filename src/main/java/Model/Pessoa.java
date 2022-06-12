@@ -13,7 +13,7 @@ public abstract class Pessoa implements Serializable {
 
 
     public String nome;
-    public String email;
+    public String Usuario;
     public String categoria;
     public int codigo;
 
@@ -34,12 +34,12 @@ public abstract class Pessoa implements Serializable {
     }
 
 
-    public String getEmail() {
-        return email;
+    public String getUsuario() {
+        return Usuario;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsuario(String usuario) {
+        this.Usuario = usuario;
     }
 
 

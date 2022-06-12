@@ -25,8 +25,8 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
     JLabel lblNome = new JLabel("Nome");
     JTextField tfNome = new JTextField(30);
 
-    JLabel lbEmail = new JLabel("Email");
-    JTextField tfEmail = new JTextField(30);
+    JLabel lbCategoria = new JLabel("Categoria");
+    JTextField tfCategoria = new JTextField(30);
 
 
     JLabel lblArea = new JLabel("Areas");
@@ -56,8 +56,8 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
         btnAdicionarDocente.addActionListener(this);
         lblNome.setBounds(30, 100, 150, 20);
         tfNome.setBounds(30, 120, 250, 20);
-        lbEmail.setBounds(30, 140, 150, 20);
-        tfEmail.setBounds(30, 160, 250, 20);
+        lbCategoria.setBounds(30, 140, 150, 20);
+        tfCategoria.setBounds(30, 160, 250, 20);
         btnAdicionarDocente.setBounds(30, 260, 100, 20);
         btnVoltar.setBounds(1, 1, 70, 20);
         lbDocentes.setBounds(350, 100, 120, 20);
@@ -71,9 +71,9 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
         //Coluna Oeste
         container.add(lblNome);
         container.add(tfNome);
-        container.add(lbEmail);
-        container.add(tfEmail);
-        container.add(tfEmail);
+        container.add(lbCategoria);
+        container.add(tfCategoria);
+        container.add(tfCategoria);
         container.add(btnAdicionarDocente);
         container.add(btnApagar);
         container.add(btnVoltar);
@@ -174,7 +174,7 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
                 Docente docente = new Docente();
                 docente = listaDocentes.getSelectedValue();
                 tfNome.setText(docente.getNome());
-                tfEmail.setText(docente.getEmail());
+                tfCategoria.setText(docente.getUsuario());
                 cbArea.setSelectedItem(docente.getCadeira());
             } catch (Exception exception){}
 
@@ -184,10 +184,10 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
         if (accao.getSource() == btnAdicionarDocente) {
 
             Docente docente = new Docente();
-            docente.setEmail(tfEmail.getText());
+            docente.setUsuario(tfCategoria.getText());
             docente.setNome(tfNome.getText());
             docente.setCadeira((Cadeira) cbArea.getSelectedItem());
-
+            ((Cadeira) cbArea.getSelectedItem()).setDocente(docente);
 
             docentes.add(docente);
             File ficheiro = new File("docentes.crono");

@@ -3,29 +3,38 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package View;
+import Model.Cadeira;
+import Model.Cronograma;
+
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
 
 public class TelaGerirCronograma extends JFrame {
-    //Criação de componentes
-    JLabel lbTitulo =new JLabel("Título");
-    JTextField tfTitulo = new JTextField(30);
-    JLabel lbEmail = new JLabel("E-mail");
-    JTextField tfEmail=new JTextField(30);
-    JLabel lbTurma = new JLabel("Turma");
-    JComboBox cbTurmas = new JComboBox<>();
-    JButton btnActualizar = new JButton("Actualizar");
+    //Criando Variáveis Globais
+
+    ArrayList<Cronograma> cronogramas=new ArrayList<>();
+
+    //Criando componentes
+    DefaultListModel<Cronograma> listModel= new DefaultListModel<>();
+
+
+    JScrollPane scrollPane = new JScrollPane();
+
+    JButton btnApagar = new JButton("Apagar");
     JLabel lbListaCronogramas = new JLabel("Lista de Cronogramas");
     JList listaCronogramas = new JList<>();
-    JButton btnApagar = new JButton("APagar");
-    JButton btnCriarCronograma = new JButton("Gerar");
-    JLabel lbPrevia = new JLabel("Imagem");
+    JButton btnImprimir = new JButton("Imprimir");
     //Alocação de coordenadas no painel
 
     public TelaGerirCronograma(){
 
         setTitle("Gerir Cronogramas");
-        setSize(800, 320);
+        setSize(400, 320);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
         setLocationRelativeTo(null);
@@ -35,37 +44,56 @@ public class TelaGerirCronograma extends JFrame {
 
 
 
-        lbTitulo.setBounds(50,100,250,20);
-        tfTitulo.setBounds(50,120,200,20);
-        lbEmail.setBounds(50,140,120,20);
-        tfEmail.setBounds(50,160,250,20);
-        lbTurma.setBounds(50,180,120,20);
-        cbTurmas.setBounds(50,200,150,20);
-        btnCriarCronograma.setBounds(50,240,80,20);
-        btnActualizar.setBounds(150,240,100,20);
-        lbListaCronogramas.setBounds(580,100,200,20);
-        listaCronogramas.setBounds(580,120,200,120);
-        lbPrevia.setBounds(380,120,120,120);
-        btnApagar.setBounds(580,240,80,20);
+        //Alocando componentes no painel
+        scrollPane.setBounds(20,40,250,190);
+        btnImprimir.setBounds(20,240,90,20);
+        btnApagar.setBounds(150,240,100,20);
+        lbListaCronogramas.setBounds(20,20,200,20);
+        listaCronogramas.setBounds(20,40,250,190);
+        listaCronogramas.setModel(listModel); //Definindo ListModel da lista de Áreas.
+
         //Adicionando compenentes ao painel.
-        container.add(lbTitulo);
-        container.add(tfTitulo);
-        container.add(lbEmail);
-        container.add(tfEmail);
-        container.add(lbTurma);
-        container.add(cbTurmas);
-        container.add(btnActualizar);
+        scrollPane.setViewportView(listaCronogramas);
+        container.add(scrollPane);
         container.add(btnApagar);
-        container.add(btnCriarCronograma);
+        container.add(btnImprimir);
         container.add(listaCronogramas);
-        container.add(lbPrevia);
         container.add(lbListaCronogramas);
         }
-        
-        public static void main(String[] args) {
+
+    public void carregarCronogramas() throws IOException, ClassNotFoundException {
+
+
+        Cronograma cronograma = new Cronograma();
+        cronogramas.add(cronograma);
+        File ficheiro = new File("cronogramas.crono");
+        ObjectInputStream objectoLer = null;
+        try {
+
+            objectoLer = new ObjectInputStream(new FileInputStream(ficheiro));
+            cronogramas = (ArrayList<Cronograma>) objectoLer.readObject();
+            objectoLer.close();
+            for (int i = 0; i < cronogramas.size(); i++) {
+
+                cronograma = cronogramas.get(i);
+                cronograma.setCodigo(i);
+                listModel.addElement(cronograma);
+            }
+            JOptionPane.showMessageDialog(null, "Cronogramas carregados com sucesso!");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao carregar os cronogramas!");
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
             
         
             TelaGerirCronograma tela=new TelaGerirCronograma();
+            tela.carregarCronogramas();
         }
         
 }

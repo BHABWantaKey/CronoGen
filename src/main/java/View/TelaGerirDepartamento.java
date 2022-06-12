@@ -15,7 +15,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 
-public class TelaRegistarInstituicao extends JFrame implements ActionListener {
+public class TelaGerirDepartamento extends JFrame implements ActionListener {
 
 
 
@@ -27,7 +27,7 @@ public class TelaRegistarInstituicao extends JFrame implements ActionListener {
     JTextField tfNome = new JTextField(30);
     JButton btnVoltar = new JButton("Voltar");
 
-    JButton btnRegistarInstituicao = new JButton("Criar");
+    JButton btnRegistarDepartamento = new JButton("Criar");
 
     JList<Cadeira> jListCadeiras =new JList<Cadeira>();
     JLabel lbAreas= new JLabel("Áreas");
@@ -36,12 +36,12 @@ public class TelaRegistarInstituicao extends JFrame implements ActionListener {
     JTextField tfAreas = new JTextField();
     DefaultListModel<Cadeira> listModel= new DefaultListModel<>();
 
-    public TelaRegistarInstituicao() {
+    public TelaGerirDepartamento() {
 
 
 
 
-        setTitle("Instituição");
+        setTitle("Departamento");
         setSize(350, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
@@ -55,8 +55,8 @@ public class TelaRegistarInstituicao extends JFrame implements ActionListener {
         btnVoltar.setBounds(1,1,70,20);
         lbNome.setBounds(50, 50, 250, 20);
         tfNome.setBounds(50, 70, 250, 20);
-        btnRegistarInstituicao.setBounds(50, 110, 80, 20);
-        btnRegistarInstituicao.addActionListener(this);
+        btnRegistarDepartamento.setBounds(50, 110, 80, 20);
+        btnRegistarDepartamento.addActionListener(this);
         jListCadeiras.setModel(listModel); //Definindo ListModel da lista de Áreas.
         lbAreas.setBounds(50,150,100,20);
         jListCadeiras.setBounds(50,210,180,120);
@@ -68,7 +68,7 @@ public class TelaRegistarInstituicao extends JFrame implements ActionListener {
         //Adicionando compenentes ao painel.
         container.add(lbNome);
         container.add(tfNome);
-        container.add(btnRegistarInstituicao);
+        container.add(btnRegistarDepartamento);
         container.add(lbAreas);
         container.add(jListCadeiras);
         container.add(btnAddCadeira);
@@ -116,7 +116,7 @@ public class TelaRegistarInstituicao extends JFrame implements ActionListener {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
 
-        TelaRegistarInstituicao tela = new TelaRegistarInstituicao();
+        TelaGerirDepartamento tela = new TelaGerirDepartamento();
         tela.carregarCadeiras();
 
 
@@ -130,7 +130,7 @@ public class TelaRegistarInstituicao extends JFrame implements ActionListener {
         TelaMenuSecretario telaMenuSecretario=new TelaMenuSecretario();}
 
         //Definindo a acção do botão para registar instituição.
-        if (accao.getSource() == btnRegistarInstituicao) {
+        if (accao.getSource() == btnRegistarDepartamento) {
 
             Instituicao instituicao = new Instituicao();
 

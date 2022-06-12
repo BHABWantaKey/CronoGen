@@ -91,7 +91,7 @@ if (accao.getSource()==btnVoltar)
 
             //Captura informaçoes da textfield para o objecto secretário
             secretario.setNome(tfNome.getText());
-            secretario.setEmail(tfEmail.getText());
+            secretario.setUsuario(tfEmail.getText());
             secretario.setSenha(String.valueOf(tfSenha.getPassword()));
 
             //Por implementar envio de dados por E-mail antes de encerrar a tela.
