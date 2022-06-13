@@ -5,7 +5,6 @@
 package View;
 
 import Model.Cadeira;
-import Model.Docente;
 import Model.Turma;
 
 import javax.swing.*;
@@ -123,7 +122,7 @@ btnAssociar.addActionListener(this);
                 turma.setCodigo(i);
                 listaDeTurmas.addItem(turma);
             }
-            JOptionPane.showMessageDialog(null, "Turmas carregadas com sucesso");
+          //  JOptionPane.showMessageDialog(null, "Turmas carregadas com sucesso");
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro ao carregar as turmas");
             throw new RuntimeException(e);
@@ -151,7 +150,7 @@ btnAssociar.addActionListener(this);
                 cadeira.setCodigo(i);
                 cadeiraJComboBox.addItem(cadeira);
             }
-            JOptionPane.showMessageDialog(null, "Cadeiras carregadas com sucesso");
+       //     JOptionPane.showMessageDialog(null, "Cadeiras carregadas com sucesso");
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro ao carregar as cadeiras.");
             throw new RuntimeException(e);
@@ -169,10 +168,10 @@ btnAssociar.addActionListener(this);
 
         cadeiras = turma.getCadeiras();
 listModel.removeAllElements();
-            JOptionPane.showMessageDialog(null,cadeiras.get(0).getNomeCadeira());
+          //  JOptionPane.showMessageDialog(null,cadeiras.get(0).getNomeCadeira());
             for (int i = 0; i < cadeiras.size(); i++) {
                 listModel.addElement(cadeiras.get(i));
-                JOptionPane.showMessageDialog(null,cadeiras.get(i).getNomeCadeira());
+              //  JOptionPane.showMessageDialog(null,cadeiras.get(i).getNomeCadeira());
             }
 
 

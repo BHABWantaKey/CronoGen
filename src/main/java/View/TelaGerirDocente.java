@@ -110,7 +110,7 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
                 docente.setCodigo(i);
                 listModel.addElement(docente);
             }
-            JOptionPane.showMessageDialog(null, "Docentes carregados com sucesso");
+          //  JOptionPane.showMessageDialog(null, "Docentes carregados com sucesso");
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro ao carregar a Lista de docentes.");
             throw new RuntimeException(e);
@@ -139,7 +139,7 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
                 cadeira.setCodigo(i);
                 cbArea.addItem(cadeira);
             }
-            JOptionPane.showMessageDialog(null, "Áreas de actividade carregadas com sucesso");
+          //  JOptionPane.showMessageDialog(null, "Áreas de actividade carregadas com sucesso");
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro ao carregar as áreas de actividade.");
             throw new RuntimeException(e);

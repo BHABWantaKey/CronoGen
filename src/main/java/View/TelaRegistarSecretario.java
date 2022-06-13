@@ -109,9 +109,9 @@ if (accao.getSource()==btnVoltar)
                 } catch (IOException e) {
                     JOptionPane.showMessageDialog(null, "Occorreu um erro ao Registar o secretário.");
                 }
-            } else if  (tfEmail.getText().length()==0  && tfNome.getText().length()==0 && tfSenha.getText().length()==0) {
+            } else if  (tfEmail.getText().length()==0  || tfNome.getText().length()==0 || tfSenha.getText().length()==0) {
                 JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos");
-            }
+            } else {JOptionPane.showMessageDialog(null,"O nome de usuario e senha devem conter pelo menos 8 caratcteres");}
 
 
         }

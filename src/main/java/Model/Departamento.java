@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * @author Espaco de Inovacao
  */
-public class Instituicao implements Serializable {
+public class Departamento implements Serializable {
 
     String nome;
     ArrayList<Secretario> secretarios;

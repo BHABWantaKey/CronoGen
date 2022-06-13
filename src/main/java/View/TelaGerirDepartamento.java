@@ -5,7 +5,7 @@
 package View;
 
 import Model.Cadeira;
-import Model.Instituicao;
+import Model.Departamento;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +23,7 @@ public class TelaGerirDepartamento extends JFrame implements ActionListener {
 
     ArrayList<Cadeira> cadeiras = new ArrayList<Cadeira>();
     //Criação de componentes
-    JLabel lbNome = new JLabel("Nome da Instituição");
+    JLabel lbNome = new JLabel("Nome do Departamento");
     JTextField tfNome = new JTextField(30);
     JButton btnVoltar = new JButton("Voltar");
 
@@ -102,7 +102,7 @@ public class TelaGerirDepartamento extends JFrame implements ActionListener {
                 cadeira.setCodigo(i);
                 listModel.addElement(cadeira);
             }
-            JOptionPane.showMessageDialog(null, "Áreas de actividade carregadas com sucesso");
+          JOptionPane.showMessageDialog(null, "Áreas de actividade carregadas com sucesso");
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro ao carregar as áreas de actividade.");
             throw new RuntimeException(e);
@@ -129,25 +129,25 @@ public class TelaGerirDepartamento extends JFrame implements ActionListener {
         if (accao.getSource() == btnVoltar){this.dispose();
         TelaMenuSecretario telaMenuSecretario=new TelaMenuSecretario();}
 
-        //Definindo a acção do botão para registar instituição.
+        //Definindo a acção do botão para registar Departamento.
         if (accao.getSource() == btnRegistarDepartamento) {
 
-            Instituicao instituicao = new Instituicao();
+            Departamento departamento = new Departamento();
 
-            instituicao.setNome(tfNome.getText());
+            departamento.setNome(tfNome.getText());
 
 
-            File ficheiro = new File("instituicao.crono");
+            File ficheiro = new File("departamento.crono");
 
             try {
                 ObjectOutputStream objecto = new ObjectOutputStream(new FileOutputStream(ficheiro));
-                objecto.writeObject(instituicao);
+                objecto.writeObject(departamento);
                 objecto.close();
 
-                JOptionPane.showMessageDialog(null, "Instituição " + instituicao.getNome() + " registada com sucesso.");
+                JOptionPane.showMessageDialog(null, "Departamento " + departamento.getNome() + " registado com sucesso.");
 
             } catch (IOException e) {
-                JOptionPane.showMessageDialog(null, "Ocorreu uma falha ao registar Instituição");
+                JOptionPane.showMessageDialog(null, "Ocorreu uma falha ao registar Departamento");
                 throw new RuntimeException(e);
             }
 
@@ -179,10 +179,10 @@ public class TelaGerirDepartamento extends JFrame implements ActionListener {
                 listModel.addElement(cadeira);
 
             } catch (IOException e) {
-                JOptionPane.showMessageDialog(null, "Ocorreu uma falha ao registar Actividade");
+                JOptionPane.showMessageDialog(null, "Ocorreu uma falha ao registar Cadeira");
                 throw new RuntimeException(e);
             } catch (ClassNotFoundException e) {
-                JOptionPane.showMessageDialog(null, "Ocorreu uma falha ao Actualizar a lista de Actividades!");
+                JOptionPane.showMessageDialog(null, "Ocorreu uma falha ao Actualizar a lista de Cadeiras!");
                 throw new RuntimeException(e);
             }
 

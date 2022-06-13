@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="JTattooDemo">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Bibliotecas/Aparencia/JTattooDemo/JTattooDemo.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Bibliotecas/pdf/barcodes-7.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Bibliotecas/pdf/commons-7.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Bibliotecas/pdf/forms-7.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Bibliotecas/pdf/io-7.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Bibliotecas/pdf/kernel-7.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Bibliotecas/pdf/layout-7.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Bibliotecas/pdf/pdfa-7.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Bibliotecas/pdf/pdftest-7.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Bibliotecas/pdf/sign-7.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Bibliotecas/pdf/styled-xml-parser-7.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Bibliotecas/pdf/svg-7.2.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

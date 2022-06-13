@@ -8,17 +8,22 @@ package View;
 import Model.Cadeira;
 import Model.Cronograma;
 import Model.Turma;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 
 public class TelaHorario extends JFrame implements ActionListener{
 
+    //declarando variáveis globais
+    ArrayList<Cronograma> cronogramas=new ArrayList<>();
+    Turma turmaCrono =new Turma();
+    ArrayList<Cadeira> cadeirasCrono= new ArrayList<>();
 
     //Criando Componentes
     JButton btnGuardarCronograma = new JButton("Guardar");
@@ -56,7 +61,7 @@ public class TelaHorario extends JFrame implements ActionListener{
                 turma = turmas.get(i);
                 cbTurmas.addItem(turma);
             }
-            JOptionPane.showMessageDialog(null, "Turmas carregadas com sucesso");
+            //JOptionPane.showMessageDialog(null, "Turmas carregadas com sucesso");
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro ao carregar as turmas");
             throw new RuntimeException(e);
@@ -109,6 +114,7 @@ public class TelaHorario extends JFrame implements ActionListener{
         //Adicionando action listenners aos componentes
         btnADD.addActionListener(this);
         btnVoltar.addActionListener(this);
+        btnGuardarCronograma.addActionListener(this);
 
         //Definindo UI manager
 
@@ -132,8 +138,7 @@ public class TelaHorario extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent accao) {
-        Turma turmaCrono = null;
-        ArrayList<Cadeira> cadeirasCrono= new ArrayList<>();
+
         if (accao.getSource() == btnVoltar){ this.dispose();
             TelaMenuSecretario telaMenuSecretario= new TelaMenuSecretario();}
         if (accao.getSource()==btnADD){ArrayList<Cadeira> cadeiras = new ArrayList<>();
@@ -174,23 +179,27 @@ public class TelaHorario extends JFrame implements ActionListener{
             row[4] = cadeiras.get(14);
             model.addRow(row);
 
-            turmaCrono=turma;
             cadeirasCrono=cadeiras;
+            turmaCrono=turma;
+
+
             JOptionPane.showMessageDialog(null, "Actividade carregada com sucesso!");
 
         }
         if (accao.getSource()==btnGuardarCronograma){
+
             Cronograma cronograma =new Cronograma();
             cronograma.setTurma(turmaCrono);
             cronograma.cadeiras= cadeirasCrono;
             cronograma.setNome(turmaCrono.getNome()+" Horário");
+            cronogramas.add(cronograma);
             File ficheiro = new File("cronogramas.crono");
 
 
             ObjectOutputStream objecto = null;
             try {
                 objecto = new ObjectOutputStream(new FileOutputStream(ficheiro));
-                objecto.writeObject(cronograma);
+                objecto.writeObject(cronogramas);
                 objecto.close();
                 turmaCrono.setCronograma(cronograma);
                 JOptionPane.showMessageDialog(null,"Cronograma guardado com sucesso!");

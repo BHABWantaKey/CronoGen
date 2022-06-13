@@ -14,7 +14,7 @@ import java.io.IOException;
 public class TelaMenuSecretario extends JFrame implements ActionListener {
 
     JButton btnDocentes = new JButton("Docentes");
-    JButton btnCadeiras = new JButton("Actividades");
+    JButton btnCadeiras = new JButton("Departamento");
     JButton btnCronogramas = new JButton("Cronogramas");
     JButton btnCriarCronogramas = new JButton("Criar Cronogramas");
     JButton btnTurmas = new JButton("Turmas");
@@ -81,14 +81,44 @@ public class TelaMenuSecretario extends JFrame implements ActionListener {
         if (accao.getSource() == btnDocentes) {
 
             TelaGerirDocente telaGerirDocente = new TelaGerirDocente();
+            try {
+                telaGerirDocente.carregarCadeiras();
+                telaGerirDocente.carregarDocentes();
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
 
             //Tela para Gestão de Cadeiras e Instituição.
         } else if (accao.getSource() == btnCadeiras) {
-            TelaGerirDepartamento telaGerirActividades = new TelaGerirDepartamento();
+            TelaGerirDepartamento telaGerirDepartamento = new TelaGerirDepartamento();
+            try {
+                telaGerirDepartamento.carregarCadeiras();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
 
-             //Abre tela de relatórios.
+            //Abre tela de relatórios.
         } else if (accao.getSource() == btnRelatorios) {
             TelaRelatorios telaRelatorios = new TelaRelatorios();
+
+            try {
+                telaRelatorios.carregarCronogramas();
+                telaRelatorios.carregarDepartamento();
+                telaRelatorios.carregarTurmas();
+                telaRelatorios.carregarDocentes();
+                telaRelatorios.carregarCadeiras();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
             this.dispose();
 
             //Sai para a tela de login
@@ -100,11 +130,25 @@ public class TelaMenuSecretario extends JFrame implements ActionListener {
             //Abre a tela pra criação de cronogramas
         } else if (accao.getSource() == btnCriarCronogramas) {
             TelaHorario telaHorario = new TelaHorario();
-             this.dispose();
+            try {
+                telaHorario.carregarTurmas();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            this.dispose();
 
             //Abre tela para Gestão de Cronogramas.
         } else if (accao.getSource() == btnCronogramas) {
             TelaGerirCronograma telaGerirCronograma = new TelaGerirCronograma();
+            try {
+                telaGerirCronograma.carregarCronogramas();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
             this.dispose();
 
             //Abre tela para gestão de turmas.
