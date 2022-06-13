@@ -188,6 +188,8 @@ public class TelaGerirDocente extends JFrame implements ActionListener {
             docente.setNome(tfNome.getText());
             docente.setCadeira((Cadeira) cbArea.getSelectedItem());
             ((Cadeira) cbArea.getSelectedItem()).setDocente(docente);
+            tfCategoria.setText("");
+            tfNome.setText("");
 
             docentes.add(docente);
             File ficheiro = new File("docentes.crono");

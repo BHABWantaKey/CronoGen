@@ -27,7 +27,7 @@ public class TelaGerirDepartamento extends JFrame implements ActionListener {
     JTextField tfNome = new JTextField(30);
     JButton btnVoltar = new JButton("Voltar");
 
-    JButton btnRegistarDepartamento = new JButton("Criar");
+    JButton btnRegistarDepartamento = new JButton("Registar");
 
     JList<Cadeira> jListCadeiras =new JList<Cadeira>();
     JLabel lbAreas= new JLabel("Áreas");
@@ -145,7 +145,7 @@ public class TelaGerirDepartamento extends JFrame implements ActionListener {
                 objecto.close();
 
                 JOptionPane.showMessageDialog(null, "Departamento " + departamento.getNome() + " registado com sucesso.");
-
+                tfNome.setText("");
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, "Ocorreu uma falha ao registar Departamento");
                 throw new RuntimeException(e);

@@ -18,7 +18,7 @@ public class TelaRegistarSecretario extends JFrame implements ActionListener {
     JLabel lbNome = new JLabel("Nome");
     JTextField tfNome = new JTextField(50);
 
-    JLabel lbEmail = new JLabel("E-mail");
+    JLabel lbEmail = new JLabel("Usuario");
     JTextField tfEmail = new JTextField();
     JLabel lblSenha = new JLabel("Senha");
     JPasswordField tfSenha = new JPasswordField(20);

@@ -251,7 +251,7 @@ listModel.removeAllElements();
 Turma turma= new Turma();
 
             turma.setNome(tfNome.getText());
-
+            tfNome.setText("");
 
             turmas.add(turma);
             File ficheiro = new File("turmas.crono");
